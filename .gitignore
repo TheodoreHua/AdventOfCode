@@ -142,3 +142,6 @@ cython_debug/
 # IDE Files
 .idea/
 
+# Project Files
+input.txt
+**/input.txt
