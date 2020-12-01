@@ -7,7 +7,7 @@ def sum_check(target:int, values:list):
                 return
 
 
-with open("input.txt", "r") as f:
+with open("../input.txt", "r") as f:
     report = f.readlines()
     try:
         report = [int(r.strip()) for r in report]
