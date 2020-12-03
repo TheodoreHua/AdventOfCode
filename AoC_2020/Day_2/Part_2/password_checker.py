@@ -17,7 +17,7 @@ def count_valid(data):
     return valid_count
 
 
-with open("../input.txt", "r") as f:
+with open("../data/input.txt", "r") as f:
     data = [l.strip() for l in f.readlines()]
 
 print(count_valid(data))
