@@ -27,10 +27,10 @@ def count_valid(passports, guidelines):
     return valid_count
 
 
-with open("../data/input.txt", "r") as f:
+with open("data/input.txt", "r") as f:
     data = f.read()
 
-with open("../data/guidelines.json", "r") as f:
+with open("data/guidelines.json", "r") as f:
     guidelines = load(f)
 
 data = data.split("\n\n")

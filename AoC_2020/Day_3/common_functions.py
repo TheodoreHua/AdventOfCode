@@ -24,9 +24,3 @@ def count_trees(lines, right=3, down=1):
         column += right
         row += down
     return tree_count
-
-
-with open("../data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(count_trees(duplicate_required(data)))

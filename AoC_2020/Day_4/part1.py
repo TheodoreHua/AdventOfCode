@@ -4,20 +4,23 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-import re
+def check_valid(passport, required):
+    for require_field in required:
+        if require_field not in passport:
+            return False
+    return True
 
-def count_valid(data):
+def count_valid(passports, required):
     valid_count = 0
-    for line in data:
-        data_tup = re.findall(r"(\d*)-(\d*) (\w): (\w*)", line)[0]
-        n_pos, f_pos, letter = int(data_tup[0]), int(data_tup[1]), data_tup[2]
-        password = data_tup[3]
-        if (password[n_pos - 1] == letter) != (password[f_pos - 1] == letter):
+    for passport in passports:
+        if check_valid(passport, required):
             valid_count += 1
     return valid_count
 
 
-with open("../data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
+with open("data/input.txt", "r") as f:
+    data = f.read()
 
-print(count_valid(data))
+data = data.split("\n\n")
+
+print(count_valid(data, ["ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt"]))

@@ -4,21 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from math import ceil
-
-def get_num(sequence, upper, up_char):
-    pointer = 0
-    for i in sequence:
-        diff = ceil(upper / 2)
-        upper = diff
-        if i == up_char:
-            pointer += diff
-    return pointer
-
-def get_seat_id(sequence):
-    row = get_num(sequence[:7], 127, "B")
-    column = get_num(sequence[7:], 7, "R")
-    return row * 8 + column
+from common_functions import *
 
 def get_highest_seat_id(sequence_set):
     seat_ids = []
@@ -27,7 +13,7 @@ def get_highest_seat_id(sequence_set):
     return max(seat_ids)
 
 
-with open("../data/input.txt", "r") as f:
+with open("data/input.txt", "r") as f:
     data = [l.strip() for l in f.readlines()]
 
 print(get_highest_seat_id(data))
