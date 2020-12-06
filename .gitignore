@@ -143,4 +143,5 @@ cython_debug/
 .idea/
 
 # Input Files
-**/data/*
+**/data/
+data/
