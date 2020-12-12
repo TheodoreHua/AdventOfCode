@@ -112,7 +112,6 @@ def count_occupied(rows):
 
 
 with open("data/input.txt", "r") as f:
-    # with open("data/test_input.txt", "r") as f:
     data = [l.strip() for l in f.readlines()]
 
 print(count_occupied(data))
