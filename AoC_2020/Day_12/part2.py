@@ -20,7 +20,7 @@ def rotate(origin, point, degrees):
     return [newx, newy]
 
 def get_manhattan(instructions):
-    # FIXME: Incorrect rotation, exact issue unkown, most likely equation issue: https://lambda.sx/0ET9.png
+    # FIXME: Incorrect rotation, exact issue unknown, most likely equation issue: https://lambda.sx/0ET9.png
     ship_coordinates = [0, 0]
     waypoint_coordinates = [10, 1]
     rotation = 0
