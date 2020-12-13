@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------
 
 # ******************************************************************************************
-# BIG FAT CREDIT TO /u/metaquarx (https://github.com/metaquarx/) for helping with debugging
+# CREDIT TO /u/metaquarx (https://github.com/metaquarx/) for helping with debugging
 # ******************************************************************************************
 
 from common_functions import *
