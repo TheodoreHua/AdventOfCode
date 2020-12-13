@@ -13,7 +13,6 @@ def get_manhattan(instructions):
     coordinates = [0, 0]
     rotation = 0
     for instruction in instructions:
-        print(instruction, "X", coordinates[0], "Y", coordinates[1], "Rotation", rotation)
         instruc = instruction[:1]
         num = int(instruction[1:])
         if instruc == "N":
