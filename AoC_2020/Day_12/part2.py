@@ -13,15 +13,14 @@ def rotate(origin, point, degrees):
     ox, oy = origin
     px, py = point
     degree = radians(degrees)
-    r = sqrt(((px - ox) ** 2) + ((py - oy) ** 2))
-    # FIXME: asin and atan returns different results, both are wrong
+    r = sqrt((px - ox) ** 2 + (py - oy) ** 2)
     radian = asin((py - oy) / r)
-    # radian = atan((py - oy) / (px - ox))
-    newx = ox + r * cos(degree + radian)
-    newy = oy + r * sin(degree + radian)
+    newx = ox + r * abs(cos(degree + radian))
+    newy = oy + r * abs(sin(degree + radian))
     return [newx, newy]
 
 def get_manhattan(instructions):
+    # FIXME: Incorrect rotation, exact issue unkown, most likely equation issue: https://lambda.sx/0ET9.png
     ship_coordinates = [0, 0]
     waypoint_coordinates = [10, 1]
     rotation = 0
@@ -37,9 +36,6 @@ def get_manhattan(instructions):
         elif instruc == "W":
             waypoint_coordinates[0] -= num
         elif instruc == "L":
-            # FIXME: Seems that instruction sets with a instruction that rotates
-            #  left somehow causes incorrect values, with right being fine
-            # https://lambda.sx/L2d.png
             rotation += num
             if rotation >= 360:
                 rotation = rotation - 360 * floor(rotation / 360)
