@@ -47,7 +47,7 @@ def get_subsequent_timestamp(ids):
         times = []
 
 
-with open("data/test_input.txt", "r") as f:
+with open("data/input.txt", "r") as f:
     data = f.readlines()
 
 print("---\n", get_subsequent_timestamp(data[1].split(",")), "\n---")
