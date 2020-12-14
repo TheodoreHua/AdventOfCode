@@ -4,7 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from math import floor, sin, cos, sqrt, asin, radians
+from math import floor, sin, cos, sqrt, asin, radians, pi
 
 DEGREES = {-0: "E", -90: "S", -180: "W", -270: "N",
            0: "E", 90: "N", 180: "W", 270: "S"}
@@ -13,14 +13,17 @@ def rotate(origin, point, degrees):
     ox, oy = origin
     px, py = point
     degree = radians(degrees)
+    m, n = 0, 2
+    if px - ox < 0:
+        m = 1
+        n = 1
     r = sqrt((px - ox) ** 2 + (py - oy) ** 2)
-    radian = asin((py - oy) / r)
-    newx = ox + r * abs(cos(degree + radian))
-    newy = oy + r * abs(sin(degree + radian))
+    Ap = m * pi + (-1)**n * asin((py - oy) / r)
+    newx = ox + r * cos(degree + Ap)
+    newy = oy + r * sin(degree + Ap)
     return [newx, newy]
 
 def get_manhattan(instructions):
-    # FIXME: Incorrect rotation, exact issue unknown, most likely equation issue: https://lambda.sx/0ET9.png
     ship_coordinates = [0, 0]
     waypoint_coordinates = [10, 1]
     rotation = 0
@@ -60,7 +63,7 @@ def get_manhattan(instructions):
     return abs(ship_coordinates[0]) + abs(ship_coordinates[1])
 
 
-with open("data/test_input.txt", "r") as f:
+with open("data/input.txt", "r") as f:
     data = [l.strip() for l in f.readlines()]
 
 print(get_manhattan(data))
