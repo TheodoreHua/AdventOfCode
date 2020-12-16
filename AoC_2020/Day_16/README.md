@@ -1,4 +1,4 @@
-# \[--\] Day 16: Ticket Translation \[++\]
+# Day 16: Ticket Translation
 
 [https://adventofcode.com/2020/day/16](https://adventofcode.com/2020/day/16)
 
