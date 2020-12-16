@@ -6,9 +6,6 @@
 
 from common_functions import *
 
-def get_frequent(value):
-    return max(set(value), key=value.count)
-
 def remove_invalid(tickets, fields):
     new_tickets = []
     for ticket in tickets:
