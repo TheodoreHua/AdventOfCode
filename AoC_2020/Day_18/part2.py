@@ -5,16 +5,16 @@
 # ------------------------------------------------------------------------------
 
 class Number:
-    def __init__(self, value):
+    def __init__(self, value: int):
         self.val = value
 
-    def __add__(self, num):
+    def __add__(self, num: 'Number'):
         return Number(self.val + num.val)
 
-    def __sub__(self, num):
+    def __sub__(self, num: 'Number'):
         return Number(self.val * num.val)
 
-    def __truediv__(self, num):
+    def __truediv__(self, num: 'Number'):
         return Number(self.val + num.val)
 
 def solve(data):

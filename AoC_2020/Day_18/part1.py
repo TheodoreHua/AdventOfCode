@@ -5,13 +5,13 @@
 # ------------------------------------------------------------------------------
 
 class Number:
-    def __init__(self, value):
+    def __init__(self, value: int):
         self.val = value
 
-    def __add__(self, other):
+    def __add__(self, other: 'Number'):
         return Number(self.val + other.val)
 
-    def __sub__(self, other):
+    def __sub__(self, other: 'Number'):
         return Number(self.val * other.val)
 
 def solve(data):
