@@ -6,9 +6,9 @@
 
 from re import compile
 
-CHAR_RULE = compile(r"^(\d): \"([a-z])\"$")
-SUB_RULE = compile(r"^(\d): ([0-9 ]*)$")
-OR_RULE = compile(r"^(\d): ([0-9 ]*) | ([0-9 ]*)$")
+CHAR_RULE = compile(r"^(\d*): \"([a-z])\"$")
+SUB_RULE = compile(r"^(\d*): ([0-9 ]*)$")
+OR_RULE = compile(r"^(\d*): ([0-9 ]*) | ([0-9 ]*)$")
 
 def parse_input(filename):
     with open(filename, "r") as f:
@@ -34,28 +34,23 @@ def parse_input(filename):
         dat["messages"].append(message)
     return dat
 
-def match(message, stack, rules):
-    if len(stack) > len(message):
-        return False
-    elif len(stack) == 0 or len(message) == 0:
-        return len(stack) == 0 and len(message) == 0
-
-    c = stack.pop()
-    if isinstance(c, str):
-        if message[0] == c:
-            return match(message[1:], stack.copy(), rules)
+def match(message, nums, rules):
+    if not nums:
+        return not message
+    rule = rules[nums.pop(0)]
+    if rule["type"] == "char":
+        return message.startswith(rule["val"]) and match(message[len(rule["val"]):], nums, rules)
     else:
-        for rule in rules[c]:
-            if match(message, stack + list(reversed(rule)), rules):
-                return True
-    return False
+        results = []
+        for sub in rule["val"]:
+            results.append(match(message, sub + nums, rules))
+        return any(results)
 
-def r_messages(data):
-    count = 0
+def count_valid(data):
+    results = []
     for message in data["messages"]:
-        if match(message, list(reversed(data["rules"][0]["val"][0])), data["rules"]):
-            count += 1
-    return count
+        results.append(match(message, [0], data["rules"]))
+    return sum(results)
 
 
-print(r_messages(parse_input("data/test_input.txt")))
+print(count_valid(parse_input("data/input.txt")))
