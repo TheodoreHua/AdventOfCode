@@ -1,6 +1,6 @@
 **DISCLAIMER:** This code is NOT mine, after experimenting for a while I was unable to get a working solution. In the 
 end I opted for finding a solution and trying to understand it (for the future). All code in this directory (`Day_20`) is 
-code from [megedmin](https://github.com/mgedmin) and I do not own any of it.
+code from [mgedmin](https://github.com/mgedmin) and I do not own any of it.
 
 ---
 
