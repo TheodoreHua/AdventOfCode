@@ -3,6 +3,8 @@ end I opted for finding a solution and trying to understand it (for the future).
 code from [Arknave](https://github.com/arknave) aside from the final piece of parsing code in part 1 that generated the 
 actual answer (the ordering of the cups starting from 1 and excluding 1), and I do not own anything else.
 
+I may attempt to re-write this myself however that'll most likely be in the new year
+
 ---
 
 # Day 23: Crab Cups
