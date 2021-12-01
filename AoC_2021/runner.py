@@ -66,4 +66,4 @@ if __name__ == "__main__":
         from time import sleep
         from random import randint
 
-        run_aoc(example_func, '', test_runner=[i for i in range(1, 1000)], target=randint(1, 1000))
+        run_aoc(example_func, '', test_runner=list(range(1, 1000)), target=randint(1, 1000))
