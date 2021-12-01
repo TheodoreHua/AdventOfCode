@@ -30,8 +30,6 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     :param input_path: Path to the input file to run from
     :param test_runner: Whether the function is being run as a test
     """
-    start = time()
-
     if test_runner is None:
         if not isfile(input_path):
             print("Input file does not exist")
@@ -41,6 +39,7 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     else:
         d = test_runner
 
+    start = time()
     with alive_bar(force_tty=True, unknown='stars') as bar:
         r = func(d, bar, *args, **kwargs)
     print("Program successfully finished in {}, return value is '{}'".format(timedelta(seconds=time() - start), r))
