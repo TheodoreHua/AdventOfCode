@@ -11,6 +11,7 @@ from typing import Callable
 
 from alive_progress import alive_bar
 
+
 def example_func(d, bar, target):
     """Basic mimic function to test AoC runner"""
     for i, j in enumerate(d):
@@ -20,7 +21,8 @@ def example_func(d, bar, target):
         bar()
     return "No result found"
 
-def run_aoc(func:Callable, input_path:str, test_runner:list=None, *args, **kwargs):
+
+def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **kwargs):
     """Default puzzle function runner code for AoC
 
     :param func: Function to run that takes arguments d (data) and bar (progress bar), expected to return final value
@@ -45,7 +47,7 @@ if __name__ == "__main__":
         try:
             day = int(sys.argv[1])
             part = int(sys.argv[2])
-            args = sys.argv[3:] if len(sys.argv) > 3 else []
+            ars = sys.argv[3:] if len(sys.argv) > 3 else []
         except ValueError:
             print("Day and part must be integers")
             sys.exit(-1)
@@ -54,10 +56,10 @@ if __name__ == "__main__":
             sys.exit(-1)
         directory = "Day_{:02}".format(day)
         module = __import__("{}.part{}".format(directory, part), fromlist=['main'])
-        run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *args)
+        run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
     else:
         # Basic test if file is run by itself
         from time import sleep
         from random import randint
 
-        run_aoc(example_func, None, test_runner=[i for i in range(1,1000)], target=randint(1,1000))
+        run_aoc(example_func, '', test_runner=[i for i in range(1, 1000)], target=randint(1, 1000))
