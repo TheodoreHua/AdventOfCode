@@ -4,7 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def main(d:list, bar):
+def main(d: list, bar):
     past = float('inf')
     mapped = []
     for i in d:
