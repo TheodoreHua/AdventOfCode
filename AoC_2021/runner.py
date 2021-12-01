@@ -28,7 +28,7 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
 
     :param func: Function to run that takes arguments d (data) and bar (progress bar), expected to return final value
     :param input_path: Path to the input file to run from
-    :param test_runner: Whether or not the function is being run as a test
+    :param test_runner: Whether the function is being run as a test
     """
     start = time()
 
