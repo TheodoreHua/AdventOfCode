@@ -8,6 +8,7 @@ import sys
 from datetime import timedelta
 from time import time
 from typing import Callable
+from os.path import isfile
 
 from alive_progress import alive_bar
 
@@ -32,6 +33,9 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     start = time()
 
     if test_runner is None:
+        if not isfile(input_path):
+            print("Input file does not exist")
+            sys.exit(-1)
         with open(input_path, "r") as f:
             d = [l.strip() for l in f.readlines()]
     else:
