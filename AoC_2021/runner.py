@@ -29,7 +29,7 @@ def run_aoc(func:Callable, test_runner:list=None, **kwargs):
 
     if test_runner is None:
         with open("data/input.txt", "r") as f:
-            d = f.readlines()
+            d = [l.strip() for l in f.readlines()]
     else:
         d = test_runner
 
