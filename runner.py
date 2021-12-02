@@ -67,6 +67,9 @@ if __name__ == "__main__":
         if not 25 >= day >= 1 or part not in (1, 2):
             print("Invalid day or part value")
             sys.exit(-1)
+        elif year == 2020:
+            print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
+            sys.exit(-1)
         directory = "AoC_{}/Day_{:02}".format(year, day)
         module = __import__("{}.part{}".format(directory.replace('/','.'), part), fromlist=['main'])
         if not test:
