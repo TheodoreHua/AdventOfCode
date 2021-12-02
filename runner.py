@@ -51,23 +51,24 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
 if __name__ == "__main__":
     if len(sys.argv) >= 3:
         try:
-            day = int(sys.argv[1])
-            part = sys.argv[2]
+            year = int(sys.argv[1])
+            day = int(sys.argv[2])
+            part = sys.argv[3]
             test = False
             if part.endswith('-test'):
-                part = int(sys.argv[2].rstrip('-test'))
+                part = int(sys.argv[3].rstrip('-test'))
                 test = True
             else:
                 part = int(part)
-            ars = sys.argv[3:] if len(sys.argv) > 3 else []
+            ars = sys.argv[4:] if len(sys.argv) > 4 else []
         except ValueError:
             print("Day and part must be integers")
             sys.exit(-1)
         if not 25 >= day >= 1 or part not in (1, 2):
             print("Invalid day or part value")
             sys.exit(-1)
-        directory = "Day_{:02}".format(day)
-        module = __import__("{}.part{}".format(directory, part), fromlist=['main'])
+        directory = "AoC_{}/Day_{:02}".format(year, day)
+        module = __import__("{}.part{}".format(directory.replace('/','.'), part), fromlist=['main'])
         if not test:
             run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
         else:
