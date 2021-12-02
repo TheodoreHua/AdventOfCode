@@ -31,6 +31,7 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     :param input_path: Path to the input file to run from
     :param test_runner: Whether the function is being run as a test
     """
+    # Load file data, if it's a test, user demo data provided through the argument
     if test_runner is None:
         if not isfile(input_path):
             print("Input file does not exist")
@@ -40,21 +41,26 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     else:
         d = test_runner
 
+    # Store the start time and start the function with a progress bar
     start = time()
     with alive_bar(force_tty=True, unknown='stars') as bar:
         r = func(d, bar, *args, **kwargs)
+    # Print the run time and the return result
     print("Program successfully finished in {}, return value is '{}'".format(timedelta(seconds=time() - start), r))
 
+    # Return result from function for tests and other functionality that may need it
     return r
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 3:
+    # Check if the runner was provided enough arguments, if not, run demo function
+    if len(sys.argv) >= 4:
         try:
             year = int(sys.argv[1])
             day = int(sys.argv[2])
             part = sys.argv[3]
             test = False
+            # If the part number ends with test, run the part function against test data rather than real data
             if part.endswith('-test'):
                 part = int(sys.argv[3].rstrip('-test'))
                 test = True
@@ -64,21 +70,26 @@ if __name__ == "__main__":
         except ValueError:
             print("Day and part must be integers")
             sys.exit(-1)
+        # Basic checks to make sure day and parts are valid
         if not 25 >= day >= 1 or part not in (1, 2):
             print("Invalid day or part value")
             sys.exit(-1)
+        # 2020 was not made around runner, and doesn't support it (yet)
         elif year == 2020:
             print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
             sys.exit(-1)
         directory = "AoC_{}/Day_{:02}".format(year, day)
+        # Import the main function from the corresponding year, day, part file
         module = __import__("{}.part{}".format(directory.replace('/', '.'), part), fromlist=['main'])
         if not test:
             run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
         else:
+            # Get a list of all valid test filenames
             test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test_')]
             if len(test_files) == 0:
                 print("No test files found, cancelled")
                 sys.exit(-1)
+            # Iterate through every test and run the corresponding part against it
             for fn in test_files:
                 print("Initiating test '{}'".format(fn))
                 expected = fn.lstrip('test_').rstrip('.txt')
