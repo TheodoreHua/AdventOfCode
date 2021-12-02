@@ -71,7 +71,7 @@ if __name__ == "__main__":
             print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
             sys.exit(-1)
         directory = "AoC_{}/Day_{:02}".format(year, day)
-        module = __import__("{}.part{}".format(directory.replace('/','.'), part), fromlist=['main'])
+        module = __import__("{}.part{}".format(directory.replace('/', '.'), part), fromlist=['main'])
         if not test:
             run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
         else:
