@@ -8,6 +8,7 @@ import sys
 from datetime import timedelta
 from time import time
 from typing import Callable
+from os import listdir
 from os.path import isfile
 
 from alive_progress import alive_bar
@@ -44,12 +45,20 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
         r = func(d, bar, *args, **kwargs)
     print("Program successfully finished in {}, return value is '{}'".format(timedelta(seconds=time() - start), r))
 
+    return r
+
 
 if __name__ == "__main__":
     if len(sys.argv) >= 3:
         try:
             day = int(sys.argv[1])
-            part = int(sys.argv[2])
+            part = sys.argv[2]
+            test = False
+            if part.endswith('-test'):
+                part = int(sys.argv[2].rstrip('-test'))
+                test = True
+            else:
+                part = int(part)
             ars = sys.argv[3:] if len(sys.argv) > 3 else []
         except ValueError:
             print("Day and part must be integers")
@@ -59,7 +68,23 @@ if __name__ == "__main__":
             sys.exit(-1)
         directory = "Day_{:02}".format(day)
         module = __import__("{}.part{}".format(directory, part), fromlist=['main'])
-        run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
+        if not test:
+            run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
+        else:
+            test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test_')]
+            if len(test_files) == 0:
+                print("No test files found, cancelled")
+                sys.exit(-1)
+            for fn in test_files:
+                print("Initiating test " + fn)
+                expected = fn.lstrip('test_').rstrip('.txt')
+                actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
+                if str(actual) == expected:
+                    print("Test {} succeeded with a return result of {} and an expected result of {}".format(
+                        fn, actual, expected))
+                else:
+                    print("Test {} failed with a return result of {} and an expected result of {}".format(fn, actual,
+                                                                                                          expected))
     else:
         # Basic test if file is run by itself
         from time import sleep
