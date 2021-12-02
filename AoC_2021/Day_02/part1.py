@@ -5,17 +5,18 @@
 # ------------------------------------------------------------------------------
 
 def main(d: list, bar):
+    # Initiate default values
     horizontal = 0
     depth = 0
     for i in d:
         if i.startswith('forward '):
-            horizontal += int(i.lstrip('forward '))
+            horizontal += int(i.lstrip('forward '))  # Increase horizontal value by X if command is forward
         elif i.startswith('up '):
-            depth -= int(i.lstrip('up '))
+            depth -= int(i.lstrip('up '))  # Decrease depth by X if command is up
         elif i.startswith('down '):
-            depth += int(i.lstrip('down '))
+            depth += int(i.lstrip('down '))  # Increase depth by X if command is down
         else:
-            print("Invalid value detected: " + i)
+            print("Invalid value detected: " + i)  # Print an error message if there's an issue in data then skip it
         bar()
 
-    return horizontal * depth
+    return horizontal * depth  # Return multiplied value

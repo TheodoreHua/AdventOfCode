@@ -5,20 +5,21 @@
 # ------------------------------------------------------------------------------
 
 def main(d: list, bar):
+    # Initiate default values
     horizontal = 0
     depth = 0
     aim = 0
     for i in d:
         if i.startswith('forward '):
-            f = int(i.lstrip('forward '))
-            horizontal += f
-            depth += aim * f
+            f = int(i.lstrip('forward '))  # Define a variable for X as it's used more than once
+            horizontal += f  # Increase horizontal value by X
+            depth += aim * f  # Increase depth by aim multiplied by X
         elif i.startswith('up '):
-            aim -= int(i.lstrip('up '))
+            aim -= int(i.lstrip('up '))  # Decrease aim by X if command is up
         elif i.startswith('down '):
-            aim += int(i.lstrip('down '))
+            aim += int(i.lstrip('down '))  # Increase aim by X if command is down
         else:
-            print("Invalid value detected: " + i)
+            print("Invalid value detected: " + i)  # Print an error message if there's an issue in data then skip it
         bar()
 
-    return horizontal * depth
+    return horizontal * depth  # Return multiplied value
