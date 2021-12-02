@@ -76,15 +76,15 @@ if __name__ == "__main__":
                 print("No test files found, cancelled")
                 sys.exit(-1)
             for fn in test_files:
-                print("Initiating test " + fn)
+                print("Initiating test '{}'".format(fn))
                 expected = fn.lstrip('test_').rstrip('.txt')
                 actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
                 if str(actual) == expected:
-                    print("Test {} succeeded with a return result of {} and an expected result of {}".format(
-                        fn, actual, expected))
+                    print("Test '{}' SUCCEEDED with a return result of '{}' and an expected result of {}".format(
+                        fn, actual, repr(expected)))
                 else:
-                    print("Test {} failed with a return result of {} and an expected result of {}".format(fn, actual,
-                                                                                                          expected))
+                    print("Test '{}' FAILED with a return result of '{}' and an expected result of {}".format(
+                        fn, actual, repr(expected)))
     else:
         # Basic test if file is run by itself
         from time import sleep
