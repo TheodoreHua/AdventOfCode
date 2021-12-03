@@ -92,7 +92,10 @@ if __name__ == "__main__":
             # Iterate through every test and run the corresponding part against it
             for fn in test_files:
                 print("Initiating test '{}'".format(fn))
-                expected = fn[6:-4]
+                # Slice out the test_ and .txt parts of the filename to get the expected values, as well as - which can
+                # be appended to the end of a filename in order to allow for tests with the same result (which would
+                # originally result in the same filename)
+                expected = fn[6:-4].rstrip('-')
                 actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
                 if str(actual) == expected:
                     print("Test '{}' SUCCEEDED with a return result of '{}' and an expected result of {}".format(
