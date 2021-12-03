@@ -85,14 +85,14 @@ if __name__ == "__main__":
             run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
         else:
             # Get a list of all valid test filenames
-            test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test_')]
+            test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(part))]
             if len(test_files) == 0:
                 print("No test files found, cancelled")
                 sys.exit(-1)
             # Iterate through every test and run the corresponding part against it
             for fn in test_files:
                 print("Initiating test '{}'".format(fn))
-                expected = fn.lstrip('test_').rstrip('.txt')
+                expected = fn[6:-4]
                 actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
                 if str(actual) == expected:
                     print("Test '{}' SUCCEEDED with a return result of '{}' and an expected result of {}".format(
