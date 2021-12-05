@@ -15,11 +15,9 @@ def main(d:list, bar):
         if x1 == x2:  # Check if line is vertical
             for y in range(min(y1, y2), max(y1, y2) + 1):
                 points.append((x1, y))
-                bar()
         elif y1 == y2:  # Check if line is horizontal
             for x in range(min(x1, x2), max(x1, x2) + 1):
                 points.append((x, y1))
-                bar()
         else:
             continue
         for point in points:
@@ -27,6 +25,5 @@ def main(d:list, bar):
                 lined_points[point] += 1
             else:
                 lined_points[point] = 1
-            bar()
 
     return len([i for i in lined_points.values() if i > 1])
