@@ -4,8 +4,10 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
+from AoC_2021.Day_05.commons import parse_input
+
 def main(d:list, bar):
-    lines = [[(int(k) for k in j.split(',')) for j in i.split(" -> ")] for i in d]
+    lines = parse_input(d)
     lined_points = {}
     for line in lines:
         bar()
