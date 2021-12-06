@@ -4,7 +4,26 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from AoC_2021.Day_06.commons import lanternfish_simulation
+class Lanternfish:
+    def __init__(self, timer):
+        self.timer = timer
+
+    def age(self):
+        if self.timer == 0:
+            self.timer = 6
+            return Lanternfish(8)
+        else:
+            self.timer -= 1
 
 def main(d:list, bar):
-    return lanternfish_simulation(d, bar, 80)
+    lanternfishes = [Lanternfish(int(i)) for i in d[0].split(',')]
+    for _ in range(80):
+        new = []
+        for lanternfish in lanternfishes:
+            r = lanternfish.age()
+            if r is not None:
+                new.append(r)
+        lanternfishes = lanternfishes + new
+        bar()
+
+    return len(lanternfishes)

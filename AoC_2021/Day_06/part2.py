@@ -4,7 +4,16 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from AoC_2021.Day_06.commons import lanternfish_simulation
+"""I tried to brute force using Day 1 on a high-powered compute server w/ 92 GB of RAM and a fast CPU...didn't work.
+Heck part 2, IHMS. Onto r/adventofcode in desperation we go (full disclosure, the below code was not made by me but
+rather /u/JohnnyWobble over on r/AdventOfCode. Good job to them!"""
 
 def main(d:list, bar):
-    return lanternfish_simulation(d, bar, 256)
+    d = list(map(int, d[0].split(',')))
+    fish = [d.count(i) for i in range(9)]
+    for _ in range(256):
+        n = fish.pop(0)
+        fish[6] += n
+        fish.append(n)
+
+    return sum(fish)
