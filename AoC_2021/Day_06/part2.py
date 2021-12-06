@@ -15,5 +15,6 @@ def main(d:list, bar):
         n = fish.pop(0)
         fish[6] += n
         fish.append(n)
+        bar()
 
     return sum(fish)
