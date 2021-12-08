@@ -6,7 +6,7 @@
 
 """I tried to brute force using Day 1 on a high-powered compute server w/ 92 GB of RAM and a fast CPU...didn't work.
 Heck part 2, IHMS. Onto r/adventofcode in desperation we go (full disclosure, the below code was not made by me but
-rather /u/JohnnyWobble over on r/AdventOfCode. Good job to them!"""
+rather /u/JohnnyWobble over on r/AdventOfCode. Good job to them!)"""
 
 def main(d:list, bar):
     d = list(map(int, d[0].split(',')))
