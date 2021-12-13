@@ -63,7 +63,7 @@ if __name__ == "__main__":
             test = False
             # If the part number ends with test, run the part function against test data rather than real data
             if part.endswith('-test'):
-                part = int(sys.argv[3].rstrip('-test'))
+                part = int(part.rstrip('-test'))
                 test = True
             else:
                 part = int(part)
