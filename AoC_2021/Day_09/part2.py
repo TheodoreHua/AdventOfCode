@@ -8,6 +8,7 @@ from numpy import prod
 
 from AoC_2021.Day_09.commons import Heightmap
 
+
 def count_basin(heightmap, x, y, done=None):
     if done is None:
         done = []
@@ -19,7 +20,8 @@ def count_basin(heightmap, x, y, done=None):
             count += count_basin(heightmap, cx, cy, done)
     return count
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     heightmap = Heightmap(d)
     basins = []
     for x in range(heightmap.width):

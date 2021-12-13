@@ -6,10 +6,11 @@
 
 import re
 
+
 class Board:
-    def __init__(self, board:list):
+    def __init__(self, board: list):
         # Convert data into list of boards (list of rows [list of nums with dict to represent marking])
-        self.board = [{j:False for j in i} for i in board]
+        self.board = [{j: False for j in i} for i in board]
 
     def check_win(self):
         """Check if this board has won"""

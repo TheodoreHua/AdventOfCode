@@ -4,7 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def main(d:list, bar):
+def main(d: list, bar):
     d = [i.split(' | ')[1].split(' ') for i in d]
     easy_count = 0
     for line in d:

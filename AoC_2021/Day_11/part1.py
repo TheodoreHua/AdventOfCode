@@ -7,7 +7,7 @@
 from AoC_2021.Day_11.commons import *
 
 
-def main(d:list, bar):
+def main(d: list, bar):
     octopuses = [[Octopus(int(j)) for j in i] for i in d]
     mh, mw = len(octopuses), len(octopuses[0])
     flashes = 0

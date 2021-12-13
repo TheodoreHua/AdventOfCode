@@ -17,4 +17,6 @@ def oneliner(d: list, bar):
     """One liner solution, because I felt like it. Just replace the code in main with
     'return oneliner(d,bar)' to use it
     """
-    return (lambda y=[(lambda x=[i[pos] for i in d]: {'0': x.count('0'), '1': x.count('1')})() for pos in range(len(d[0]))]: int(''.join([max(i, key=i.get) for i in y]), 2) * int(''.join([min(i, key=i.get) for i in y]), 2))()
+    return (lambda y=[(lambda x=[i[pos] for i in d]: {'0': x.count('0'), '1': x.count('1')})() for pos in
+                      range(len(d[0]))]: int(''.join([max(i, key=i.get) for i in y]), 2) * int(
+        ''.join([min(i, key=i.get) for i in y]), 2))()

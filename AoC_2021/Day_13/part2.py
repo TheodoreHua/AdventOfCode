@@ -7,7 +7,7 @@
 from AoC_2021.Day_13.commons import parse_input
 
 
-def main(d:list, bar):
+def main(d: list, bar):
     grid, folds = parse_input(d)
     for fold in folds:
         grid.fold(*fold)

@@ -8,7 +8,8 @@
 Heck part 2, IHMS. Onto r/adventofcode in desperation we go (full disclosure, the below code was not made by me but
 rather /u/JohnnyWobble over on r/AdventOfCode. Good job to them!)"""
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     d = list(map(int, d[0].split(',')))
     fish = [d.count(i) for i in range(9)]
     for _ in range(256):

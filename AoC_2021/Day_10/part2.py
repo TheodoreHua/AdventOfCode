@@ -7,24 +7,26 @@
 from statistics import median
 
 m = {
-    ')':'(',
-    ']':'[',
-    '}':'{',
-    '>':'<'
+    ')': '(',
+    ']': '[',
+    '}': '{',
+    '>': '<'
 }
 c = {
-    ')':1,
-    ']':2,
-    '}':3,
-    '>':4
+    ')': 1,
+    ']': 2,
+    '}': 3,
+    '>': 4
 }
 
+
 def get_by_value(dc, value):
-    for k,v in dc.items():
+    for k, v in dc.items():
         if v == value:
             return k
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     error_scores = []
     for line in d:
         characters = []

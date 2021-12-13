@@ -23,7 +23,7 @@ class Grid:
         self.max_height = max(self.dots, key=lambda i: i[1])[1] + 1
 
     def __str__(self):
-        s = (lambda x=['.' for _ in range(self.max_width)]:[x[:] for _ in range(self.max_height)])()
+        s = (lambda x=['.' for _ in range(self.max_width)]: [x[:] for _ in range(self.max_height)])()
         for dot in self.dots:
             s[dot[1]][dot[0]] = '#'
 

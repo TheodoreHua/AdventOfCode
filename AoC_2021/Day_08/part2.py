@@ -6,6 +6,7 @@
 
 from itertools import permutations
 
+
 def main(d: list, bar):
     d = [[j.split(' ') for j in i.split(' | ')] for i in d]
     output_sum = 0
@@ -14,7 +15,7 @@ def main(d: list, bar):
     all_chars = 'abcdefg'
     for line in d:
         for permutation in permutations(all_chars):
-            perm_m = {i:j for i,j in zip(permutation, all_chars)}
+            perm_m = {i: j for i, j in zip(permutation, all_chars)}
             signals = [''.join(perm_m[j] for j in i) for i in line[0]]
             if all(''.join(sorted(i)) in m.keys() for i in signals):
                 output_sum += int(''.join(

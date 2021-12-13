@@ -6,7 +6,8 @@
 
 from AoC_2021.Day_04.commons import *
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     # Obtain draws and boards as properly formatted lists
     draws, boards = parse_input(d, bar)
     for draw in draws:

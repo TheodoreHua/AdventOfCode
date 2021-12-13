@@ -4,7 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def main(d:list, bar):
+def main(d: list, bar):
     crabs = list(map(int, d[0].split(',')))
     mapped_positions = {}
     sc, lc = min(crabs), max(crabs)

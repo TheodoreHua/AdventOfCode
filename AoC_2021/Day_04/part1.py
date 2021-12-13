@@ -6,7 +6,8 @@
 
 from AoC_2021.Day_04.commons import *
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     # Obtain draws and boards as properly formatted lists
     draws, boards = parse_input(d, bar)
     # Go through each draw, then each board and return the sum of undrawn values multiplied by the draw when one wins

@@ -15,7 +15,8 @@ class Lanternfish:
         else:
             self.timer -= 1
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     lanternfishes = [Lanternfish(int(i)) for i in d[0].split(',')]
     for _ in range(80):
         new = []

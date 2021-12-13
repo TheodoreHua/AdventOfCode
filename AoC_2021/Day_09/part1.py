@@ -6,7 +6,8 @@
 
 from AoC_2021.Day_09.commons import Heightmap
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     heightmap = Heightmap(d)
     risk_level = 0
     for x in range(heightmap.width):

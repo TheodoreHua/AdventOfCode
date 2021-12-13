@@ -12,7 +12,7 @@ def main(d: list, bar):
     past = float('inf')
     while index <= len(d):
         # Get the sum of the current index and the next 2
-        s = sum(converted_list[index:index+3])
+        s = sum(converted_list[index:index + 3])
         # Check whether the current sum is larger than the past one
         mapped.append(s > past)
         # Update loop vars

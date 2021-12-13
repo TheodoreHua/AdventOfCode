@@ -6,7 +6,8 @@
 
 from AoC_2021.Day_05.commons import parse_input
 
-def main(d:list, bar):
+
+def main(d: list, bar):
     lines = parse_input(d)
     lined_points = {}
     for line in lines:
