@@ -30,9 +30,6 @@ class Octopus:
 
 
 def flash_adjacent(octopuses, x, y):
-    # if done is None:
-    #     done = []
-    # done.append((x, y))
     adjacent = [
         (x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1),
         (x - 1, y - 1), (x - 1, y + 1), (x + 1, y + 1), (x + 1, y - 1)
@@ -42,7 +39,6 @@ def flash_adjacent(octopuses, x, y):
             continue
         try:
             if not octopuses[cy][cx].is_flashed():
-                # done.append((cx, cy))
                 o = octopuses[cy][cx]
                 o.increment()
                 if o.should_flash():
