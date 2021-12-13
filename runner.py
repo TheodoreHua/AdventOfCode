@@ -46,7 +46,7 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     with alive_bar(force_tty=True, unknown='stars') as bar:
         r = func(d, bar, *args, **kwargs)
     # Print the run time and the return result
-    print("Program successfully finished in {}, return value is{}'".format(timedelta(
+    print("Program successfully finished in {}, return value is{}".format(timedelta(
         seconds=time() - start), " '{}'".format(r) if '\n' not in r else ":\n{}".format(r)))
 
     # Return result from function for tests and other functionality that may need it
