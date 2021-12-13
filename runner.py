@@ -47,7 +47,7 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
         r = func(d, bar, *args, **kwargs)
     # Print the run time and the return result
     print("Program successfully finished in {}, return value is{}".format(timedelta(
-        seconds=time() - start), " '{}'".format(r) if type(r) is str and '\n' not in r else ":\n{}".format(r)))
+        seconds=time() - start), ":\n{}".format(r) if type(r) is str and '\n' in r else " '{}'".format(r) ))
 
     # Return result from function for tests and other functionality that may need it
     return r
