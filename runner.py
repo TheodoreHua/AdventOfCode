@@ -46,7 +46,8 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     with alive_bar(force_tty=True, unknown='stars') as bar:
         r = func(d, bar, *args, **kwargs)
     # Print the run time and the return result
-    print("Program successfully finished in {}, return value is '{}'".format(timedelta(seconds=time() - start), r))
+    print("Program successfully finished in {}, return value is{}'".format(timedelta(
+        seconds=time() - start), " '{}'".format(r) if '\n' not in r else ":\n{}".format(r)))
 
     # Return result from function for tests and other functionality that may need it
     return r
@@ -97,12 +98,8 @@ if __name__ == "__main__":
                 # originally result in the same filename)
                 expected = fn[6:-4].rstrip('-')
                 actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
-                if str(actual) == expected:
-                    print("Test '{}' SUCCEEDED with a return result of '{}' and an expected result of {}".format(
-                        fn, actual, repr(expected)))
-                else:
-                    print("Test '{}' FAILED with a return result of '{}' and an expected result of {}".format(
-                        fn, actual, repr(expected)))
+                print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
+                    fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
     else:
         # Basic test if file is run by itself
         from time import sleep
