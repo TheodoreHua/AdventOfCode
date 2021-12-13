@@ -11,5 +11,6 @@ def main(d:list, bar):
     grid, folds = parse_input(d)
     for fold in folds:
         grid.fold(*fold)
+        bar()
 
     return str(grid)
