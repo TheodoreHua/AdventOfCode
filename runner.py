@@ -56,9 +56,9 @@ if __name__ == "__main__":
     parser.add_argument('-y', '--year', type=int, default=date.today().year,
                         help='Specify the year to run, default is the current year')
     parser.add_argument('-t', '--test', action='store_true', help='If the program should be run using test values')
-    parser.add_argument('-f', '--finite', type=lambda x: int(x) if x.isdigit() else True, default=False,
-                        help="Specify a finite number of iterations for the progress bar, enter any non-number for the "
-                             "default (number of lines in input file)")
+    parser.add_argument('-f', '--finite', type=int, const=True, default=False, nargs='?',
+                        help="Specify a finite number of iterations for the progress bar, if flag is used but argument "
+                             "is left empty, number of lines in input file is used")
     parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
 
     parse = parser.parse_args()
