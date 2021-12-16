@@ -14,8 +14,7 @@ from about_time import about_time
 from alive_progress import alive_bar
 
 
-def run_aoc(func: Callable, input_path: str, test_runner: list = None, finite: Union[int, bool] = False,
-            *args, **kwargs):
+def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *args, **kwargs):
     """Default puzzle function runner code for AoC
 
     :param func: Function to run that takes arguments d (data) and bar (progress bar), expected to return final value
@@ -23,15 +22,12 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, finite: U
     :param test_runner: Whether the function is being run as a test
     :param finite: Whether the progress bar should have a finite value or not, True for input lines, or int to specify.
     """
-    # Load file data, if it's a test, user demo data provided through the argument
-    if test_runner is None:
-        if not isfile(input_path):
-            print("Input file does not exist")
-            sys.exit(-1)
-        with open(input_path, "r") as f:
-            d = [l.strip() for l in f.readlines()]
-    else:
-        d = test_runner
+    # Load file data
+    if not isfile(input_path):
+        print("Input file does not exist")
+        sys.exit(-1)
+    with open(input_path, "r") as f:
+        d = [l.strip() for l in f.readlines()]
 
     # Track runtime and start the function with a progress bar
     with about_time() as at:
@@ -66,7 +62,6 @@ if __name__ == "__main__":
     parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
 
     parse = parser.parse_args()
-    print(parse)
 
     # 2020 was not made around runner, and doesn't support it (yet)
     if parse.year == 2020:
@@ -77,8 +72,8 @@ if __name__ == "__main__":
         # Import the main function from the corresponding year, day, part file
         module = __import__("{}.part{}".format(directory.replace('/', '.'), parse.part), fromlist=['main'])
         if not parse.test:
-            run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, parse.day), test_runner=None,
-                    finite=parse.finite, *parse.args)
+            run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, parse.day), parse.finite,
+                    *parse.args)
         else:
             # Get a list of all valid test filenames
             test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(parse.part))]
@@ -92,8 +87,8 @@ if __name__ == "__main__":
                 # be appended to the end of a filename in order to allow for tests with the same result (which would
                 # originally result in the same filename)
                 expected = fn[6:-4].rstrip('-')
-                actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None,
-                                 finite=parse.finite, *parse.args)
+                actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), finite=parse.finite,
+                                 *parse.args)
                 print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
                     fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
     else:
