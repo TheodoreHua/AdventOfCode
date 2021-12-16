@@ -55,14 +55,14 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Run AoC code in a human-friendly way')
-    parser.add_argument('-y', '--year', type=int, default=date.today().year,
-                        help='Specify the year to run, default is the current year')
     parser.add_argument('day', type=int, choices=range(1, 26), nargs='?', help='Which day to run', metavar='DAY')
     parser.add_argument('part', type=int, choices=[1, 2], nargs='?', help='Which part to run', metavar='PART')
+    parser.add_argument('-y', '--year', type=int, default=date.today().year,
+                        help='Specify the year to run, default is the current year')
     parser.add_argument('-t', '--test', action='store_true', help='If the program should be run using test values')
-    parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
     parser.add_argument('-f', '--finite', type=lambda x: int(x) if x.isdigit() else True, default=False,
                         help="Specify a finite number of iterations, enter 'input' for number of lines in input")
+    parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
 
     parse = parser.parse_args()
     print(parse)
