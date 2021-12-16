@@ -50,15 +50,15 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Run AoC code in a human-friendly way')
-    parser.add_argument('day', type=int, choices=range(1, 26), nargs='?', help='Which day to run', metavar='DAY')
-    parser.add_argument('part', type=int, choices=[1, 2], nargs='?', help='Which part to run', metavar='PART')
+    parser.add_argument('day', type=int, choices=range(1, 26), nargs='?', help='which day to run', metavar='DAY')
+    parser.add_argument('part', type=int, choices=[1, 2], nargs='?', help='which part to run', metavar='PART')
     parser.add_argument('-y', '--year', type=int, default=date.today().year,
-                        help='Specify the year to run, default is the current year')
-    parser.add_argument('-t', '--test', action='store_true', help='If the program should be run using test values')
+                        help='specify the year to run, default is the current year')
+    parser.add_argument('-t', '--test', action='store_true', help='if the program should be run using test values')
     parser.add_argument('-f', '--finite', type=int, const=True, default=False, nargs='?',
-                        help="Specify a finite number of iterations for the progress bar, if flag is used but argument "
+                        help="specify a finite number of iterations for the progress bar, if flag is used but argument "
                              "is left empty, number of lines in input file is used")
-    parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
+    parser.add_argument('-a', '--args', nargs='+', default=[], help='additional arguments to provide to the program')
 
     parse = parser.parse_args()
 
