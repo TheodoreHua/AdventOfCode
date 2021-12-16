@@ -5,12 +5,11 @@
 # ------------------------------------------------------------------------------
 
 import sys
-from datetime import timedelta
-from time import time
 from typing import Callable
 from os import listdir
 from os.path import isfile
 
+from about_time import about_time
 from alive_progress import alive_bar
 
 
@@ -41,13 +40,13 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
     else:
         d = test_runner
 
-    # Store the start time and start the function with a progress bar
-    start = time()
-    with alive_bar(force_tty=True, unknown='stars') as bar:
-        r = func(d, bar, *args, **kwargs)
+    # Track runtime and start the function with a progress bar
+    with about_time() as at:
+        with alive_bar(force_tty=True, unknown='stars') as bar:
+            r = func(d, bar, *args, **kwargs)
     # Print the run time and the return result
-    print("Program successfully finished in {}, return value is{}".format(timedelta(
-        seconds=time() - start), ":\n{}".format(r) if type(r) is str and '\n' in r else " '{}'".format(r)))
+    print("Program successfully finished in {}, return value is{}".format(
+        at.duration_human, ":\n{}".format(r) if type(r) is str and '\n' in r else " '{}'".format(r)))
 
     # Return result from function for tests and other functionality that may need it
     return r
