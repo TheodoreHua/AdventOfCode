@@ -19,7 +19,6 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
 
     :param func: Function to run that takes arguments d (data) and bar (progress bar), expected to return final value
     :param input_path: Path to the input file to run from
-    :param test_runner: Whether the function is being run as a test
     :param finite: Whether the progress bar should have a finite value or not, True for input lines, or int to specify.
     """
     # Load file data
