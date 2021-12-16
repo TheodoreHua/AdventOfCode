@@ -14,16 +14,6 @@ from about_time import about_time
 from alive_progress import alive_bar
 
 
-def example_func(d, bar, target):
-    """Basic mimic function to test AoC runner"""
-    for i, j in enumerate(d):
-        if j == target:
-            return i
-        sleep(0.01)
-        bar()
-    return "No result found"
-
-
 def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **kwargs):
     """Default puzzle function runner code for AoC
 
