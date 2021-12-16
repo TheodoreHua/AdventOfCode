@@ -5,6 +5,7 @@
 # ------------------------------------------------------------------------------
 
 import sys
+from datetime import date
 from typing import Callable
 from os import listdir
 from os.path import isfile
@@ -53,55 +54,43 @@ def run_aoc(func: Callable, input_path: str, test_runner: list = None, *args, **
 
 
 if __name__ == "__main__":
-    # Check if the runner was provided enough arguments, if not, run demo function
-    if len(sys.argv) >= 4:
-        try:
-            year = int(sys.argv[1])
-            day = int(sys.argv[2])
-            part = sys.argv[3]
-            test = False
-            # If the part number ends with test, run the part function against test data rather than real data
-            if part.endswith('-test'):
-                part = int(part.rstrip('-test'))
-                test = True
-            else:
-                part = int(part)
-            ars = sys.argv[4:] if len(sys.argv) > 4 else []
-        except ValueError:
-            print("Day and part must be integers")
-            sys.exit(-1)
-        # Basic checks to make sure day and parts are valid
-        if not 25 >= day >= 1 or part not in (1, 2):
-            print("Invalid day or part value")
-            sys.exit(-1)
-        # 2020 was not made around runner, and doesn't support it (yet)
-        elif year == 2020:
-            print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
-            sys.exit(-1)
-        directory = "AoC_{}/Day_{:02}".format(year, day)
-        # Import the main function from the corresponding year, day, part file
-        module = __import__("{}.part{}".format(directory.replace('/', '.'), part), fromlist=['main'])
-        if not test:
-            run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, day), test_runner=None, *ars)
-        else:
-            # Get a list of all valid test filenames
-            test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(part))]
-            if len(test_files) == 0:
-                print("No test files found, cancelled")
-                sys.exit(-1)
-            # Iterate through every test and run the corresponding part against it
-            for fn in test_files:
-                print("Initiating test '{}'".format(fn))
-                # Slice out the test_ and .txt parts of the filename to get the expected values, as well as - which can
-                # be appended to the end of a filename in order to allow for tests with the same result (which would
-                # originally result in the same filename)
-                expected = fn[6:-4].rstrip('-')
-                actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None, *ars)
-                print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
-                    fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
-    else:
-        # Basic test if file is run by itself
-        from time import sleep
-        from random import randint
+    import argparse
 
-        run_aoc(example_func, '', test_runner=list(range(1, 1000)), target=randint(1, 1000))
+    parser = argparse.ArgumentParser(description='Run AoC code in a human-friendly way')
+    parser.add_argument('-y', '--year', type=int, default=date.today().year,
+                        help='Specify the year to run, default is this year')
+    parser.add_argument('day', type=int, choices=range(1, 26), help='Which day to run', metavar='DAY')
+    parser.add_argument('part', type=int, choices=[1, 2], help='Which part to run', metavar='PART')
+    parser.add_argument('-t', '--test', action='store_true', help='If the program should be run using test values')
+    parser.add_argument('-a', '--args', nargs='+', default=[], help='Additional arguments to provide to the program')
+
+    parse = parser.parse_args()
+    print(parse)
+
+    # 2020 was not made around runner, and doesn't support it (yet)
+    if parse.year == 2020:
+        print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
+        sys.exit(-1)
+    directory = "AoC_{}/Day_{:02}".format(parse.year, parse.day)
+    # Import the main function from the corresponding year, day, part file
+    module = __import__("{}.part{}".format(directory.replace('/', '.'), parse.part), fromlist=['main'])
+    if not parse.test:
+        run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, parse.day), test_runner=None,
+                *parse.args)
+    else:
+        # Get a list of all valid test filenames
+        test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(parse.part))]
+        if len(test_files) == 0:
+            print("No test files found, cancelled")
+            sys.exit(-1)
+        # Iterate through every test and run the corresponding part against it
+        for fn in test_files:
+            print("Initiating test '{}'".format(fn))
+            # Slice out the test_ and .txt parts of the filename to get the expected values, as well as - which can
+            # be appended to the end of a filename in order to allow for tests with the same result (which would
+            # originally result in the same filename)
+            expected = fn[6:-4].rstrip('-')
+            actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), test_runner=None,
+                             *parse.args)
+            print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
+                fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
