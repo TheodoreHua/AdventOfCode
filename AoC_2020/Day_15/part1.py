@@ -4,7 +4,8 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def counting_game(starting):
+def main(d: list, bar):
+    starting = list(map(int, d[0].split(',')))
     nums = {}
     turn_number = 1
     last_num = None
@@ -27,10 +28,5 @@ def counting_game(starting):
                 nums[sub_num] = [nums[sub_num][-1], turn_number]
             last_num = sub_num
         turn_number += 1
+        bar()
     return last_num
-
-
-with open("data/input.txt", "r") as f:
-    data = [int(l.strip()) for l in f.read().split(",")]
-
-print(counting_game(data))

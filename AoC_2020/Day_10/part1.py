@@ -9,7 +9,9 @@ def check_valid(adapter, jolts):
         return adapter - jolts
     return None
 
-def multiply_1_3_adapter(adapters):
+
+def main(d: list, bar):
+    adapters = list(map(int, d))
     adapters = sorted(adapters) + [max(adapters) + 3]
     one_count = 0
     three_count = 0
@@ -23,10 +25,5 @@ def multiply_1_3_adapter(adapters):
         else:
             break
         last_jolt = adapter
+        bar()
     return one_count * three_count
-
-
-with open("data/input.txt", "r") as f:
-    data = [int(l.strip()) for l in f.readlines()]
-
-print(multiply_1_3_adapter(data))

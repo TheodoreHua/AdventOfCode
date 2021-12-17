@@ -14,9 +14,10 @@ class Number:
     def __sub__(self, other: 'Number'):
         return Number(self.val * other.val)
 
-def solve(data):
+
+def main(d: list, bar):
     result = 0
-    for line in data:
+    for line in d:
         # Replace numbers 1-9 with the object
         for num in range(10):
             line = line.replace(str(num), "Num({})".format(num))
@@ -24,10 +25,5 @@ def solve(data):
         # order. Custom class makes subtract actually multiply)
         line = line.replace("*", "-")
         result += eval(line, {"Num": Number}).val
+        bar()
     return result
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(solve(data))

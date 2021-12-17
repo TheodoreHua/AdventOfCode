@@ -6,18 +6,21 @@
 
 from math import ceil
 
-def get_subsequent_timestamp(ids):
+
+def main(d: list, bar):
+    ids = d[1].split(',')
     timestamp = 1
     period_incre = 1
     times = []
     last_period = {}
     bus_periods = {}
     while True:
-        print(timestamp, len(str(timestamp)), period_incre)
-        for id in ids:
-            if id != "x":
-                id = int(id)
-                times.append(id*ceil(timestamp/id))
+        bar.text("TS: {:,}".format(timestamp))
+        # print(timestamp, len(str(timestamp)), period_incre)
+        for i in ids:
+            if i != "x":
+                i = int(i)
+                times.append(i * ceil(timestamp / i))
             else:
                 times.append("x")
         if times[0] != timestamp:
@@ -45,9 +48,4 @@ def get_subsequent_timestamp(ids):
             incre_count += 1
         timestamp += period_incre
         times = []
-
-
-with open("data/input.txt", "r") as f:
-    data = f.readlines()
-
-print("---\n", get_subsequent_timestamp(data[1].split(",")), "\n---")
+        bar()

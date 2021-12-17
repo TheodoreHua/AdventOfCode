@@ -8,10 +8,11 @@ from re import compile
 
 SEPARATION = compile(r"^([a-z ]*) \(contains ([a-z, ]*)\)$")
 
-def count_non_allergens(data):
+
+def main(d: list, bar):
     parsed_data = []
     allergens = {}
-    for line in data:
+    for line in d:
         ingredients, allergen = SEPARATION.findall(line)[0]
         parsed_data.append((ingredients.split(" "), allergen.split(", ")))
         for allergen in parsed_data[-1][1]:
@@ -19,6 +20,7 @@ def count_non_allergens(data):
                 allergens[allergen] = [len(parsed_data) - 1]
             else:
                 allergens[allergen].append(len(parsed_data) - 1)
+        bar()
     possible_allergens = []
     for i, dat in enumerate(parsed_data):
         ingredients, allergen = dat
@@ -33,10 +35,5 @@ def count_non_allergens(data):
                 if al:
                     all_occur.append(ingredient)
         possible_allergens += [o for o in all_occur if o not in possible_allergens]
+        bar()
     return len([j for i in parsed_data for j in i[0] if j not in possible_allergens])
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(count_non_allergens(data))

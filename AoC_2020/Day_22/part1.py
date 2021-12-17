@@ -5,9 +5,11 @@
 # ------------------------------------------------------------------------------
 
 from operator import itemgetter
-from common_functions import *
+from AoC_2020.Day_22.common_functions import *
 
-def get_win_score(data):
+
+def main(d: list, bar):
+    data = parse_input(d)
     while True:
         played_cards = {}
         for player, deck in data.items():
@@ -24,6 +26,7 @@ def get_win_score(data):
                 break
         if not cont:
             break
+        bar()
     for player, deck in data.items():
         if len(deck) != 0:
             win_player = player
@@ -33,6 +36,3 @@ def get_win_score(data):
     for i, card in enumerate(calc_deck):
         score += card * (i + 1)
     return score
-
-
-print(get_win_score(parse_input("data/input.txt")))

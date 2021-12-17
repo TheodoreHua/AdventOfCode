@@ -5,9 +5,10 @@
 # ------------------------------------------------------------------------------
 
 from itertools import product
-from common_functions import MASK_REGEX, MEM_REGEX
+from AoC_2020.Day_14.common_functions import MASK_REGEX, MEM_REGEX
 
-def get_mem(mask:str, starting:str):
+
+def get_mem(mask: str, starting: str):
     starting = list(starting)
     floating_indices = []
     for index, char in enumerate(mask):
@@ -26,14 +27,15 @@ def get_mem(mask:str, starting:str):
         possibilities.append("".join(possible))
     return possibilities
 
-def sum_val(data):
+
+def main(d: list, bar):
     mem = {}
-    for i, line in enumerate(data):
+    for i, line in enumerate(d):
         if line.startswith("mask"):
             pointer = i + 1
             mask = MASK_REGEX.findall(line)[0]
-            while pointer < len(data):
-                l = data[pointer]
+            while pointer < len(d):
+                l = d[pointer]
                 if l.startswith("mem"):
                     ld = MEM_REGEX.findall(l)[0]
                     for m in get_mem(mask, "{:036b}".format(int(ld[0]))):
@@ -41,13 +43,8 @@ def sum_val(data):
                 else:
                     break
                 pointer += 1
+        bar()
     s = 0
     for val in mem.values():
         s += val
     return s
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(sum_val(data))

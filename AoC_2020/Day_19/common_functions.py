@@ -16,6 +16,7 @@ def match(message, nums, rules):
             results.append(match(message, sub + nums, rules))
         return any(results)
 
+
 def count_valid(data):
     results = []
     for message in data["messages"]:

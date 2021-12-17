@@ -1,5 +1,5 @@
-def part1(s):
-    cups = list([int(x) for x in s])
+def main(d: list, bar):
+    cups = list(map(int, d[0]))
     for _ in range(int(1e2)):
         rem = cups[1:4]
         goal = cups[0] - 1 if cups[0] > 1 else 9
@@ -13,9 +13,10 @@ def part1(s):
             # no change
             pass
         else:
-            cups = list([cups[0]] + cups[4 : idx + 1] + rem + cups[idx + 1 :])
+            cups = list([cups[0]] + cups[4: idx + 1] + rem + cups[idx + 1:])
 
         cups = cups[1:] + [cups[0]]
+        bar()
     return_cups = []
     pointer = cups.index(1) + 1
     while True:
@@ -26,7 +27,4 @@ def part1(s):
             pointer = 0
         else:
             pointer += 1
-
-
-with open("data/input.txt", "r") as f:
-    print(part1(f.read()))
+        bar()

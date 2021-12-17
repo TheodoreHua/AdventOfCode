@@ -4,9 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def parse_input(filename):
-    with open(filename, "r") as f:
-        data = [l.strip() for l in f.readlines()]
+def parse_input(data):
     dat = {}
     cur_player = ""
     for line in data:

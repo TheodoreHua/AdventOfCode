@@ -9,10 +9,11 @@ from math import floor
 DEGREES = {-0: "E", -90: "S", -180: "W", -270: "N",
            0: "E", 90: "N", 180: "W", 270: "S"}
 
-def get_manhattan(instructions):
+
+def main(d: list, bar):
     coordinates = [0, 0]
     rotation = 0
-    for instruction in instructions:
+    for instruction in d:
         instruc = instruction[:1]
         num = int(instruction[1:])
         if instruc == "N":
@@ -44,10 +45,5 @@ def get_manhattan(instructions):
                 print("Invalid Degree")
         else:
             print("Invalid Coordinates")
+        bar()
     return abs(coordinates[0]) + abs(coordinates[1])
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(get_manhattan(data))

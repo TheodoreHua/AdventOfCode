@@ -3,7 +3,9 @@ class Node:
         self.val = val
         self.next = None
 
-def part2(s):
+
+def main(d: list, bar):
+    s = d[0]
     N = int(1e6)
     nodes = {}
     for c in range(1, N + 1):
@@ -23,7 +25,7 @@ def part2(s):
 
     head = nodes[int(s[0])]
     for _ in range(int(1e7)):
-        print(_)
+        bar.text('Iteration: {:,}'.format(_))
         rem_start = head.next
         rem_end = head.next.next.next
 
@@ -39,10 +41,7 @@ def part2(s):
         nodes[goal].next = rem_start
 
         head = head.next
+        bar()
 
     a, b = nodes[1].next.val, nodes[1].next.next.val
-    return a, b, a * b
-
-
-with open("data/input.txt", "r") as f:
-    print(part2(f.read()))
+    return a * b

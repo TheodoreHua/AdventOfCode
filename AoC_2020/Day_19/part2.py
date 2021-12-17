@@ -5,15 +5,14 @@
 # ------------------------------------------------------------------------------
 
 from re import compile
-from common_functions import *
+from AoC_2020.Day_19.common_functions import *
 
 CHAR_RULE = compile(r"^(\d*): \"([a-z])\"$")
 SUB_RULE = compile(r"^(\d*): ([0-9 ]*)$")
 OR_RULE = compile(r"^(\d*): ([0-9 ]*) | ([0-9 ]*)$")
 
-def parse_input(filename):
-    with open(filename, "r") as f:
-        data = [l.strip() for l in f.readlines()]
+
+def parse_input(data):
     pointer = 0
     dat = {"rules": {}, "messages": []}
     for i, rule in enumerate(data):
@@ -36,8 +35,9 @@ def parse_input(filename):
     for changed_rule in ["8: 42 | 42 8", "11: 42 31 | 42 11 31"]:
         r = OR_RULE.findall(changed_rule)
         dat["rules"][int(r[0][0])] = {"type": "or", "val": [[int(rn) for rn in r[0][1].split(" ")],
-                                                 [int(rn) for rn in r[1][2].split(" ")]]}
+                                                            [int(rn) for rn in r[1][2].split(" ")]]}
     return dat
 
 
-print(count_valid(parse_input("data/input.txt")))
+def main(d: list, bar):
+    return count_valid(parse_input(d))

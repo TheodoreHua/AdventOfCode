@@ -8,9 +8,10 @@ from re import compile
 
 SEPARATION = compile(r"^([a-z ]*) \(contains ([a-z, ]*)\)$")
 
-def sort_allergen_list(data):
+
+def main(d: list, bar):
     ps = {}
-    for line in data:
+    for line in d:
         parsed_line = SEPARATION.findall(line)[0]
         ingredients, allergens = set(parsed_line[0].split(" ")), set(parsed_line[1].split(", "))
         for allergen in allergens:
@@ -18,21 +19,17 @@ def sort_allergen_list(data):
                 ps[allergen] &= ingredients
             else:
                 ps[allergen] = ingredients.copy()
+        bar()
     taken = set()
     language_pairs = []
     while True:
         for allergens, ingredients in ps.items():
             if len(ingredients - taken) == 1:
-                j = min(ingredients-taken)
+                j = min(ingredients - taken)
                 language_pairs.append((allergens, j))
                 taken.add(j)
                 break
         else:
             break
+        bar()
     return ",".join(x[1] for x in sorted(language_pairs))
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(sort_allergen_list(data))

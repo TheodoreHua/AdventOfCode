@@ -1,3 +1,5 @@
+# NOTE: This file is not supported with runner, as the code is not mine
+
 import collections
 import sys
 

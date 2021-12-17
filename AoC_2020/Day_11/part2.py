@@ -4,13 +4,14 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_11.common_functions import *
 
 DIRECTIONS = [
-              (-1, -1), (-1, 0), (-1, 1),
-              (0, -1), (0, +1),
-              (1, -1), (1, 0), (1, 1)
-              ]
+    (-1, -1), (-1, 0), (-1, 1),
+    (0, -1), (0, +1),
+    (1, -1), (1, 0), (1, 1)
+]
+
 
 def check_occupy(row_index, seat_index, rows):
     adjacent_full = 0
@@ -29,6 +30,7 @@ def check_occupy(row_index, seat_index, rows):
             row_pointer += row
             seat_pointer += seat
     return adjacent_full
+
 
 def check_empty(row_index, seat_index, rows):
     adjacent_empty = 0
@@ -49,6 +51,7 @@ def check_empty(row_index, seat_index, rows):
         else:
             adjacent_empty += 1
     return adjacent_empty
+
 
 def replace_empty(row_index, rows):
     new_str = ""
@@ -92,26 +95,22 @@ def replace_empty_rows(rows):
     return new_rows
 
 
-def count_occupied(rows):
+def main(d: list, bar):
     cont_count = 0
     while True:
-        orig_rows = rows
+        orig_rows = d
         if cont_count % 2 == 0:
-            rows = replace_empty_rows(rows)
+            d = replace_empty_rows(d)
         else:
-            rows = replace_occupy_rows(rows)
-        if rows == orig_rows:
+            d = replace_occupy_rows(d)
+        if d == orig_rows:
             break
         cont_count += 1
+        bar()
     occupy_count = 0
-    for row in rows:
+    for row in d:
         for seat in row:
             if check_seat(seat) is True:
                 occupy_count += 1
+        bar()
     return occupy_count
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(count_occupied(data))

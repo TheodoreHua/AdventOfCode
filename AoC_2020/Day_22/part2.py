@@ -5,7 +5,8 @@
 # ------------------------------------------------------------------------------
 
 from operator import itemgetter
-from common_functions import *
+from AoC_2020.Day_22.common_functions import *
+
 
 def recursive_combat(data):
     prev_decks = {}
@@ -58,4 +59,5 @@ def recursive_combat(data):
     return winner, score
 
 
-print(recursive_combat(parse_input("data/input.txt"))[0])
+def main(d: list, bar):
+    return recursive_combat(parse_input(d))[1]

@@ -6,18 +6,16 @@
 
 from math import ceil
 
-def get_earliest_result(ids, number):
+
+def main(d: list, bar):
+    number = int(d[0])
+    ids = d[1].split(',')
     times = {}
-    for id in ids:
-        if id != "x":
-            id = int(id)
-            times[id] = id*ceil(number/id)
-    closest_id = min(times, key=lambda x:abs(times.get(x)-number))
-    print(closest_id, times[closest_id],times)
+    for i in ids:
+        if i != "x":
+            i = int(i)
+            times[i] = i * ceil(number / i)
+        bar()
+    closest_id = min(times, key=lambda x: abs(times.get(x) - number))
+    # print(closest_id, times[closest_id], times)
     return closest_id * (times[closest_id] - number)
-
-
-with open("data/input.txt", "r") as f:
-    data = f.readlines()
-
-print(get_earliest_result(data[1].split(","),int(data[0])))

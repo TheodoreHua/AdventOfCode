@@ -4,13 +4,8 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
-#  This Source Code Form is subject to the terms of the Mozilla Public
-#  License, v. 2.0. If a copy of the MPL was not distributed with this
-#   file, You can obtain one at http://mozilla.org/MPL/2.0/.
-# ------------------------------------------------------------------------------
-
-def counting_game(starting):
+def main(d: list, bar):
+    starting = list(map(int, d[0].split(',')))
     nums = {}
     turn_number = 1
     last_num = None
@@ -19,7 +14,7 @@ def counting_game(starting):
         turn_number += 1
         last_num = num
     while turn_number <= 30000000:
-        print(turn_number, end="\r")
+        bar.text("TN: {:,}".format(turn_number))
         if len(nums[last_num]) <= 1:
             if 0 not in nums.keys():
                 nums[0] = [turn_number]
@@ -34,11 +29,5 @@ def counting_game(starting):
                 nums[sub_num] = [nums[sub_num][-1], turn_number]
             last_num = sub_num
         turn_number += 1
+        bar()
     return last_num
-
-
-with open("data/input.txt", "r") as f:
-    data = [int(l.strip()) for l in f.read().split(",")]
-
-print(counting_game(data))
-

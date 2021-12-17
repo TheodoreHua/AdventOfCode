@@ -4,7 +4,8 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_16.common_functions import *
+
 
 def remove_invalid(tickets, fields):
     new_tickets = []
@@ -20,7 +21,9 @@ def remove_invalid(tickets, fields):
             new_tickets.append(new_ticket)
     return new_tickets
 
-def find_departure_product(data):
+
+def main(d: list, bar):
+    data = parse_input(d)
     valid_pos_fields = {}
     data["tickets"] = remove_invalid(data["tickets"], data["fields"])
     for i in range(len(data["tickets"][0])):
@@ -31,6 +34,7 @@ def find_departure_product(data):
             for name in valid_pos_fields[pos]:
                 if name not in val:
                     valid_pos_fields[pos].remove(name)
+        bar()
     already_found = []
     while True:
         for pos, possibilities in valid_pos_fields.items():
@@ -48,11 +52,9 @@ def find_departure_product(data):
                 br = False
         if br:
             break
+        bar()
     last_val = 1
     for i, val in enumerate(data["my_ticket"]):
         if valid_pos_fields[i][0].startswith("departure"):
             last_val *= val
     return last_val
-
-
-print(find_departure_product(parse_input("data/input.txt")))
