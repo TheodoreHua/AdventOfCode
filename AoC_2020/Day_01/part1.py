@@ -4,21 +4,11 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def sum_check(target:int, values:list):
-    compare_list = values[:]
-    for i in values:
+def main(d: list, bar):
+    d = list(map(int, d))
+    compare_list = d[:]
+    for i in d:
         for j in compare_list:
-            if i + j == target:
-                print("{0} + {1} = {2}\n{0} * {1} = {3}".format(i, j, i + j, i * j))
-                return
-
-
-with open("data/input.txt", "r") as f:
-    report = f.readlines()
-    try:
-        report = [int(r.strip()) for r in report]
-    except ValueError:
-        print("Invalid Value in Report")
-        exit(1)
-
-sum_check(2020, report)
+            if i + j == 2020:
+                return i * j
+            bar()

@@ -62,10 +62,6 @@ if __name__ == "__main__":
 
     parse = parser.parse_args()
 
-    # 2020 was not made around runner, and doesn't support it (yet)
-    if parse.year == 2020:
-        print("2020 is not currently available using runner, as runner was made in 2021 and 2020 wasn't updated.")
-        sys.exit(-1)
     directory = "AoC_{}/Day_{:02}".format(parse.year, parse.day)
     if parse.day is not None and parse.part is not None:
         # Import the main function from the corresponding year, day, part file
