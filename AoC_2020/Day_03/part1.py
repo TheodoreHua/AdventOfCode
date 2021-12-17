@@ -4,9 +4,8 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_03.common_functions import *
 
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
 
-print(count_trees(duplicate_required(data)))
+def main(d: list, bar):
+    return count_trees(duplicate_required(d))

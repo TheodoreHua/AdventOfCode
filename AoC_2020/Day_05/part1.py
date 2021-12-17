@@ -4,16 +4,12 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_05.common_functions import *
 
-def get_highest_seat_id(sequence_set):
+
+def main(d: list, bar):
     seat_ids = []
-    for sequence in sequence_set:
+    for sequence in d:
         seat_ids.append(get_seat_id(sequence))
+        bar()
     return max(seat_ids)
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(get_highest_seat_id(data))

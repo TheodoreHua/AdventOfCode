@@ -6,8 +6,9 @@
 
 from math import ceil
 
+
 def duplicate_required(lines, right=3, down=1):
-    duplicate_num = ceil(len(lines)/down*right/len(lines[0]))
+    duplicate_num = ceil(len(lines) / down * right / len(lines[0]))
     new_lines = []
     for line in lines:
         line_str = line
@@ -15,6 +16,7 @@ def duplicate_required(lines, right=3, down=1):
             line_str += line
         new_lines.append(line_str)
     return new_lines
+
 
 def count_trees(lines, right=3, down=1):
     row, column, tree_count = 0, 0, 0

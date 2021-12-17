@@ -10,17 +10,19 @@ def check_valid(passport, required):
             return False
     return True
 
-def count_valid(passports, required):
+
+def main(d: list, bar):
+    if d[-1] != '':
+        d.append('')
+    required = ["ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt"]
     valid_count = 0
-    for passport in passports:
-        if check_valid(passport, required):
-            valid_count += 1
+    passport = ""
+    for l in d:
+        if l == '':
+            if check_valid(passport, required):
+                valid_count += 1
+            passport = ""
+        else:
+            passport += l + ' '
+        bar()
     return valid_count
-
-
-with open("data/input.txt", "r") as f:
-    data = f.read()
-
-data = data.split("\n\n")
-
-print(count_valid(data, ["ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt"]))

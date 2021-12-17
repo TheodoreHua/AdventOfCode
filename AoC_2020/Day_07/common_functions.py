@@ -10,6 +10,7 @@ BAG_NAME_REGEX = re.compile(r"^([a-zA-Z ]+?) bags")
 CONTAIN_BAG_NAME_REGEX = re.compile(r"(\d) ?([a-z ]+)(?: bag[s]?)?")
 BAG_REGEX = re.compile(r"(?:[a-zA-Z ]+) bags contain (no other|\d [a-z ]+) bag[s]?((?:, \d [a-z ]+ bag[s]?)*)")
 
+
 def find_data(bag_string):
     matches = BAG_REGEX.findall(bag_string)[0]
     new_matches = []
@@ -29,11 +30,13 @@ def find_data(bag_string):
                 new_matches.append(match_data)
     return new_matches
 
+
 def get_bags(bag_string):
     data = find_data(bag_string)
     if data is None:
         return None
     return data
+
 
 def get_bag_dict(bags):
     bag_dict = {}

@@ -6,6 +6,7 @@
 
 from math import ceil
 
+
 def get_num(sequence, upper, up_char):
     pointer = 0
     for i in sequence:
@@ -14,6 +15,7 @@ def get_num(sequence, upper, up_char):
         if i == up_char:
             pointer += diff
     return pointer
+
 
 def get_seat_id(sequence):
     row = get_num(sequence[:7], 127, "B")

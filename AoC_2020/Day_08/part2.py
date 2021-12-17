@@ -24,9 +24,10 @@ def infini_loop_accum(instructions):
             continue
         pointer += 1
 
-def fix_inifini_loop(instructions):
-    for point, value in enumerate(instructions):
-        new_instructions = instructions[:]
+
+def main(d: list, bar):
+    for point, value in enumerate(d):
+        new_instructions = d[:]
         if value.startswith("nop"):
             new_instructions[point] = "jmp " + value[4:]
         elif value.startswith("jmp"):
@@ -36,9 +37,4 @@ def fix_inifini_loop(instructions):
         new_accum = infini_loop_accum(new_instructions)
         if new_accum is not False:
             return new_accum
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(fix_inifini_loop(data))
+        bar()

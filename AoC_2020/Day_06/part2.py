@@ -6,6 +6,7 @@
 
 from re import sub
 
+
 def count_yes(responses):
     group_members = responses.count("\n") + 1
     responses = list(sub(r"[^a-z]]", "", responses))
@@ -15,16 +16,17 @@ def count_yes(responses):
             all_yes.append(response)
     return len(all_yes)
 
-def get_yes_sum(group_responses):
+
+def main(d: list, bar):
+    if d[-1] != '':
+        d.append('')
     yes_sum = 0
-    for group in group_responses:
-        yes_sum += count_yes(group)
+    group = ''
+    for l in d:
+        if l == '':
+            yes_sum += count_yes(group.strip())
+            group = ''
+        else:
+            group += l + '\n'
+        bar()
     return yes_sum
-
-
-with open("data/input.txt", "r") as f:
-    data = f.read()
-
-data = data.split("\n\n")
-
-print(get_yes_sum(data))

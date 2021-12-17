@@ -4,19 +4,17 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_09.common_functions import *
 
-def find_invalid(preamble_length, xmas_nums):
+
+def main(d: list, bar):
+    d = list(map(int, d))
+    preamble_length = 25
     pointer = preamble_length
-    while pointer < len(xmas_nums) - 1:
-        preamble = xmas_nums[pointer - preamble_length:pointer]
-        if not adds_together(preamble, xmas_nums[pointer]):
-            return xmas_nums[pointer]
+    while pointer < len(d) - 1:
+        preamble = d[pointer - preamble_length:pointer]
+        if not adds_together(preamble, d[pointer]):
+            return d[pointer]
         pointer += 1
+        bar()
     return None
-
-
-with open("data/input.txt", "r") as f:
-    data = [int(l.strip()) for l in f.readlines()]
-
-print(find_invalid(25, data))

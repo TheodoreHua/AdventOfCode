@@ -7,6 +7,7 @@
 from json import load
 from re import compile, split
 
+
 def check_valid(passport, guidelines):
     passport_values = split(r"[\n ]", passport)
     for guideline in guidelines:
@@ -18,6 +19,7 @@ def check_valid(passport, guidelines):
         if not valid:
             return False
     return True
+
 
 def count_valid(passports, guidelines):
     valid_count = 0
@@ -36,3 +38,5 @@ with open("data/guidelines.json", "r") as f:
 data = data.split("\n\n")
 
 print(count_valid(data, guidelines))
+
+# TODO: Adapt Day 4 Part 2 to runner

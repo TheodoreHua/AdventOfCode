@@ -4,21 +4,14 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from common_functions import *
+from AoC_2020.Day_03.common_functions import *
 from math import prod
-from json import load
 
-def multiply_sets(lines, sets):
+
+def main(d: list, bar):
+    sets = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
     set_results = []
     for s in sets:
-        set_results.append(count_trees(duplicate_required(lines, right=s[0], down=s[1]), right=s[0], down=s[1]))
+        set_results.append(count_trees(duplicate_required(d, right=s[0], down=s[1]), right=s[0], down=s[1]))
+        bar()
     return prod(set_results)
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-with open("data/sets.json", "r") as f:
-    sets = load(f)
-
-print(multiply_sets(data, sets))

@@ -8,7 +8,8 @@
 # CREDIT TO /u/metaquarx (https://github.com/metaquarx/) for helping with debugging
 # ******************************************************************************************
 
-from common_functions import *
+from AoC_2020.Day_07.common_functions import *
+
 
 def count_contain(bag_name, bag_dict):
     if bag_dict[bag_name] is None:
@@ -19,7 +20,13 @@ def count_contain(bag_name, bag_dict):
     return count
 
 
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(count_contain("shiny gold", get_bag_dict(data)) - 1)
+def main(d: list, bar):
+    bag_dict = get_bag_dict(d)
+    bag_name = 'shiny gold'
+    if bag_dict[bag_name] is None:
+        return 1
+    count = 1
+    for num, contain in bag_dict[bag_name]:
+        count += count_contain(contain, bag_dict) * num
+        bar()
+    return count - 1

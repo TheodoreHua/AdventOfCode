@@ -4,7 +4,7 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def infini_loop_accum(instructions):
+def main(d: list, bar):
     pointer = 0
     accumulator = 0
     checked = []
@@ -12,7 +12,7 @@ def infini_loop_accum(instructions):
         if pointer in checked:
             return accumulator
         checked.append(pointer)
-        instruc = instructions[pointer]
+        instruc = d[pointer]
         if instruc.startswith("nop"):
             pass
         elif instruc.startswith("acc"):
@@ -21,9 +21,4 @@ def infini_loop_accum(instructions):
             pointer += int(instruc[4:])
             continue
         pointer += 1
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(infini_loop_accum(data))
+        bar()
