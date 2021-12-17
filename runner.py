@@ -29,14 +29,14 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
         d = [l.strip() for l in f.readlines()]
 
     # Track runtime and start the function with a progress bar
-    with about_time() as at:
-        if type(finite) is int:
-            b = alive_bar(finite, force_tty=True)
-        elif finite is True:
-            b = alive_bar(len(d), force_tty=True)
-        else:
-            b = alive_bar(force_tty=True, unknown='stars')
-        with b as bar:
+    if type(finite) is int:
+        b = alive_bar(finite, force_tty=True)
+    elif finite is True:
+        b = alive_bar(len(d), force_tty=True)
+    else:
+        b = alive_bar(force_tty=True, unknown='stars')
+    with b as bar:
+        with about_time() as at:
             r = func(d, bar, *args, **kwargs)
     # Print the run time and the return result
     print("Program successfully finished in {}, return value is{}".format(
