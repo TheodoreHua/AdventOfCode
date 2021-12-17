@@ -6,19 +6,15 @@
 
 import re
 
-def count_valid(data):
+
+def main(d: list, bar):
     valid_count = 0
-    for line in data:
+    for line in d:
         data_tup = re.findall(r"(\d*)-(\d*) (\w): (\w*)", line)[0]
         minimum, maximum, letter = int(data_tup[0]), int(data_tup[1]), data_tup[2]
         password = data_tup[3]
         letter_count = password.count(letter)
         if not (minimum > letter_count or letter_count > maximum):
             valid_count += 1
+        bar()
     return valid_count
-
-
-with open("data/input.txt", "r") as f:
-    data = [l.strip() for l in f.readlines()]
-
-print(count_valid(data))
