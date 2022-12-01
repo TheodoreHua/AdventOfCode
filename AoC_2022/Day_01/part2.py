@@ -10,9 +10,7 @@ def main(d: list, bar):
     for i in d:
         if i == "":
             first = True
-            bar()
-            continue
-        if first:
+        elif first:
             calories.append(int(i))
             first = False
         else:
