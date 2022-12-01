@@ -12,6 +12,7 @@ from os.path import isfile
 
 from about_time import about_time
 from alive_progress import alive_bar
+from aocd import get_data, submit
 
 
 def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *args, **kwargs):
@@ -59,6 +60,7 @@ if __name__ == "__main__":
     parser.add_argument('-y', '--year', type=int, default=date.today().year,
                         help='specify the year to run, default is the current year')
     parser.add_argument('-t', '--test', action='store_true', help='if the program should be run using test values')
+    parser.add_argument('-s', '--submit', action='store_true', help='automatically submit the result to AoC')
     parser.add_argument('-o', '--oneliner', action='store_true',
                         help='Run the program using one liner code (if available)')
     parser.add_argument('-f', '--finite', type=int, const=True, default=False, nargs='?',
@@ -69,12 +71,19 @@ if __name__ == "__main__":
     parse = parser.parse_args()
 
     directory = "AoC_{}/Day_{:02}".format(parse.year, parse.day)
-    if parse.day is not None and parse.part is not None:
+    if parse.day is not None and 1 <= parse.part <= 2:
         # Import the main function from the corresponding year, day, part file
         module = __import__("{}.part{}".format(directory.replace('/', '.'), parse.part), fromlist=['main'])
         if not parse.test:
-            run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
-                    "{}/data/input.txt".format(directory, parse.day), parse.finite, *parse.args)
+            # If input data does not exist, get it
+            if not isfile("{}/data/input.txt".format(directory)):
+                print("Input file does not exist, getting input data from AoC")
+                with open("{}/data/input.txt".format(directory), "w") as f:
+                    f.write(get_data(day=parse.day, year=parse.year))
+            result = run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
+                             "{}/data/input.txt".format(directory, parse.day), parse.finite, *parse.args)
+            if parse.submit:
+                submit(result, day=parse.day, year=parse.year, part="a" if parse.part == 1 else "b")
         else:
             # Get a list of all valid test filenames
             test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(parse.part))]
