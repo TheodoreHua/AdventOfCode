@@ -19,4 +19,4 @@ def main(d: list, bar):
             calories[-1] += int(i)
         bar()
 
-    return max(calories)
+    return sum(sorted(calories, reverse=True)[0:3])
