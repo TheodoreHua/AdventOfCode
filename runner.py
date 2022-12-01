@@ -59,6 +59,8 @@ if __name__ == "__main__":
     parser.add_argument('-y', '--year', type=int, default=date.today().year,
                         help='specify the year to run, default is the current year')
     parser.add_argument('-t', '--test', action='store_true', help='if the program should be run using test values')
+    parser.add_argument('-o', '--oneliner', action='store_true',
+                        help='Run the program using one liner code (if available)')
     parser.add_argument('-f', '--finite', type=int, const=True, default=False, nargs='?',
                         help="specify a finite number of iterations for the progress bar, if flag is used but argument "
                              "is left empty, number of lines in input file is used")
@@ -71,8 +73,8 @@ if __name__ == "__main__":
         # Import the main function from the corresponding year, day, part file
         module = __import__("{}.part{}".format(directory.replace('/', '.'), parse.part), fromlist=['main'])
         if not parse.test:
-            run_aoc(getattr(module, 'main'), "{}/data/input.txt".format(directory, parse.day), parse.finite,
-                    *parse.args)
+            run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
+                    "{}/data/input.txt".format(directory, parse.day), parse.finite, *parse.args)
         else:
             # Get a list of all valid test filenames
             test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(parse.part))]
@@ -86,8 +88,8 @@ if __name__ == "__main__":
                 # be appended to the end of a filename in order to allow for tests with the same result (which would
                 # originally result in the same filename)
                 expected = fn[6:-4].rstrip('-')
-                actual = run_aoc(getattr(module, 'main'), "{}/data/{}".format(directory, fn), finite=parse.finite,
-                                 *parse.args)
+                actual = run_aoc(getattr(module, 'oneliner' if parse.oneliner else 'main'),
+                                 "{}/data/{}".format(directory, fn), finite=parse.finite, *parse.args)
                 print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
                     fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
     else:

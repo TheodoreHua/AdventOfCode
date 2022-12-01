@@ -12,7 +12,7 @@ def main(d: str, bar):
             s += int(j)
         calories.append(s)
 
-    return sorted(calories, reverse=True)[0:3]
+    return sum(sorted(calories, reverse=True)[0:3])
 
 
 def oneliner(d: str, bar):
