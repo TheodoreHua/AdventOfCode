@@ -24,7 +24,7 @@ if __name__ == "__main__":
     if not isdir("AoC_{}".format(args.year)):
         mkdir("AoC_{}".format(args.year))
     if not isdir("AoC_{}/Day_{:02}".format(args.year, args.day)):
-        mkdir("AoC_{}/Day_{}".format(args.year, args.day))
+        mkdir("AoC_{}/Day_{:02}".format(args.year, args.day))
     if not isdir("AoC_{}/Day_{:02}/data".format(args.year, args.day)):
         mkdir("AoC_{}/Day_{:02}/data".format(args.year, args.day))
 
