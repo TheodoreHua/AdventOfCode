@@ -4,17 +4,16 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def main(d: list, bar):
+def main(d: str, bar):
     calories = []
-    first = True
-    for i in d:
-        if i == "":
-            first = True
-        elif first:
-            calories.append(int(i))
-            first = False
-        else:
-            calories[-1] += int(i)
-        bar()
+    for i in d.split("\n\n"):
+        s = 0
+        for j in i.split("\n"):
+            s += int(j)
+        calories.append(s)
 
     return max(calories)
+
+
+def oneliner(d: str, bar):
+    return max([sum([int(j) for j in i.split("\n")]) for i in d.split("\n\n")])

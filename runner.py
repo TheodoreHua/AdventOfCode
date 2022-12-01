@@ -6,7 +6,7 @@
 
 import sys
 from datetime import date
-from typing import Callable, Union
+from typing import Callable, Union, get_type_hints
 from os import listdir
 from os.path import isfile
 
@@ -25,8 +25,12 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
     if not isfile(input_path):
         print("Input file does not exist")
         sys.exit(-1)
+    expected_type = get_type_hints(func)["d"]
     with open(input_path, "r") as f:
-        d = [l.strip() for l in f.readlines()]
+        if expected_type is list:
+            d = [l.strip() for l in f.readlines()]
+        elif expected_type is str:
+            d = f.read().strip()
 
     # Track runtime and start the function with a progress bar
     if type(finite) is int:
