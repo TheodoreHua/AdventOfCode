@@ -26,7 +26,7 @@ if __name__ == "__main__":
     if not isdir("AoC_{}/Day_{:02}".format(args.year, args.day)):
         mkdir("AoC_{}/Day_{}".format(args.year, args.day))
     if not isdir("AoC_{}/Day_{:02}/data".format(args.year, args.day)):
-        mkdir("AoC_{}/Day_{}/data".format(args.year, args.day))
+        mkdir("AoC_{}/Day_{:02}/data".format(args.year, args.day))
 
     if not isfile("AoC_{}/Day_{:02}/part1.py".format(args.year, args.day)):
         with open("AoC_{}/Day_{:02}/part1.py".format(args.year, args.day), "w") as f:
