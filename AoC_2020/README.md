@@ -1,1 +1,0 @@
-*This is my code for the 2020 AoC puzzles, unless otherwise noted the horrible code was created by me. I've lost the code for the last couple of days due to a computer issue, and I can't be bothered recreating them.*

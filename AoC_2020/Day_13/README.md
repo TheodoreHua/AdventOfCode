@@ -2,8 +2,6 @@ Solution for Part 2 is quite slow (took around 18 minutes for me) due to a semi-
 brute force but instead of adding 1 each time, it adds the period between the first, and most recent 
 (correct order/minute) bus.
 
-EDIT: Using the Chinese Remainder Theorem would've worked but I was quite sleep deprived at the time of writing the code and don't quite feel like re-writing the code
-
 ---
 
 # Day 13: Shuttle Search
