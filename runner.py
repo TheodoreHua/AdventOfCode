@@ -83,7 +83,7 @@ if __name__ == "__main__":
             result = run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
                              "{}/data/input.txt".format(directory, parse.day), parse.finite, *parse.args)
             if parse.submit:
-                submit(result, day=parse.day, year=parse.year, part="a" if parse.part == 1 else "b")
+                submit(result, day=parse.day, year=parse.year, part="a" if parse.part == 1 else "b", reopen=False)
         else:
             # Get a list of all valid test filenames
             test_files = [i for i in listdir("{}/data".format(directory)) if i.startswith('test{}_'.format(parse.part))]
