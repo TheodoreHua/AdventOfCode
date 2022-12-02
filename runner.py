@@ -78,8 +78,9 @@ if __name__ == "__main__":
             # If input data does not exist, get it
             if not isfile("{}/data/input.txt".format(directory)):
                 print("Input file does not exist, getting input data from AoC")
+                data = get_data(day=parse.day, year=parse.year)
                 with open("{}/data/input.txt".format(directory), "w") as f:
-                    f.write(get_data(day=parse.day, year=parse.year))
+                    f.write(data)
             result = run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
                              "{}/data/input.txt".format(directory, parse.day), parse.finite, *parse.args)
             if parse.submit:
