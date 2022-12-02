@@ -21,3 +21,7 @@ def main(d: list, bar):
         bar()
 
     return score
+
+
+def oneliner(d: list, bar):
+    return sum(val_map[self] + (3 if opponent == conv_map[self] else 6 if self == win_map[opponent] else 0) for opponent, self in (i.split(" ") for i in d))
