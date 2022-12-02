@@ -5,6 +5,7 @@
 # ------------------------------------------------------------------------------
 
 val_map = {"A": 1, "B": 2, "C": 3}
+win_map = {"A": "B", "B": "C", "C": "A"}
 
 
 def main(d: list, bar):
@@ -12,26 +13,11 @@ def main(d: list, bar):
     for i in d:
         opponent, self = i.split(" ")
         if self == 'Y':
-            score += val_map[opponent]
-            score += 3
-        elif opponent == 'A':
-            if self == 'X':
-                score += val_map['C']
-            else:
-                score += val_map['B']
-                score += 6
-        elif opponent == 'B':
-            if self == 'X':
-                score += val_map['A']
-            else:
-                score += val_map['C']
-                score += 6
-        elif opponent == 'C':
-            if self == 'X':
-                score += val_map['B']
-            else:
-                score += val_map['A']
-                score += 6
+            score += val_map[opponent] + 3
+        elif self == 'X':
+            score += val_map["ABC".replace(opponent, "").replace(win_map[opponent], "")]
+        elif self == 'Z':
+            score += val_map[win_map[opponent]] + 6
         bar()
 
     return score
