@@ -18,3 +18,7 @@ def main(d: list, bar):
         bar()
 
     return s
+
+
+def oneliner(d: list, bar):
+    return sum(ascii_letters.index(next(j for j in i[0] if j in i[1] and j in i[2])) + 1 for i in [d[i:i + 3] for i in range(0, len(d), 3)])
