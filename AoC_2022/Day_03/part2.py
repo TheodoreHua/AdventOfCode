@@ -15,6 +15,6 @@ def main(d: list, bar):
             if j in i[1] and j in i[2]:
                 s += ascii_letters.index(j) + 1
                 break
-            bar()
+        bar()
 
     return s
