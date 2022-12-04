@@ -8,8 +8,11 @@ def main(d: list, bar):
     count = 0
     for i in d:
         pair1, pair2 = i.split(",")
-        range1, range2 = range(int(pair1.split("-")[0]), int(pair1.split("-")[1]) + 1), range(int(pair2.split("-")[0]), int(pair2.split("-")[1]) + 1)
-        if any([x in range2 for x in range1]) or any([x in range1 for x in range2]):
+        lower1, upper1 = map(int, pair1.split("-"))
+        lower2, upper2 = map(int, pair2.split("-"))
+        ab = set(range(lower1, upper1 + 1))
+        cd = set(range(lower2, upper2 + 1))
+        if ab & cd:
             count += 1
         bar()
 
