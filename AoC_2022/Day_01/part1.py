@@ -6,7 +6,7 @@
 
 def main(d: str, bar):
     calories = []
-    for i in d.split("\n\n"):
+    for i in d.strip().split("\n\n"):
         s = 0
         for j in i.split("\n"):
             s += int(j)
@@ -16,4 +16,4 @@ def main(d: str, bar):
 
 
 def oneliner(d: str, bar):
-    return max([sum([int(j) for j in i.split("\n")]) for i in d.split("\n\n")])
+    return max([sum([int(j) for j in i.split("\n")]) for i in d.strip().split("\n\n")])
