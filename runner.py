@@ -31,7 +31,7 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
         if expected_type is list:
             d = [l.strip() for l in f.readlines()]
         elif expected_type is str:
-            d = f.read().strip()
+            d = f.read()
 
     # Track runtime and start the function with a progress bar
     if type(finite) is int:
