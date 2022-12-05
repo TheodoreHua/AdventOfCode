@@ -20,9 +20,7 @@ def main(d: str, bar):
             if k.isalpha():
                 parsed[j].append(k)
 
-    full_parsed = []
-    for i in sorted(parsed.keys()):
-        full_parsed.append(parsed[i])
+    full_parsed = [parsed[i] for i in sorted(parsed.keys())]
 
     for i in steps:
         quantity, from_, to = STEP_REGEX.match(i).groups()
