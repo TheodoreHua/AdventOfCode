@@ -11,9 +11,9 @@ def get_all_sizes(directory: dict, totals=None) -> list:
         totals = []
     if directory["parent"] is None:
         totals.append(get_total_size(directory))
-    for k, v in directory["dirs"].items():
-        totals.append(get_total_size(v))
-        totals = get_all_sizes(v, totals)
+    for i in directory["dirs"].values():
+        totals.append(get_total_size(i))
+        totals = get_all_sizes(i, totals)
 
     return totals
 
