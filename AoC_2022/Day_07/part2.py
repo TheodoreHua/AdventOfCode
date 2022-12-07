@@ -6,7 +6,9 @@
 
 from .common_funcs import *
 
-def get_all_sizes(directory: dict, totals: list) -> list:
+def get_all_sizes(directory: dict, totals=None) -> list:
+    if totals is None:
+        totals = []
     if directory["parent"] is None:
         totals.append(get_total_size(directory))
     for k, v in directory["dirs"].items():
@@ -18,4 +20,4 @@ def get_all_sizes(directory: dict, totals: list) -> list:
 def main(d: list, bar):
     directory = parse_directory(d, bar)
     needed_free = -40000000 + get_total_size(directory)
-    return sorted([i for i in get_all_sizes(directory, []) if i >= needed_free])[0]
+    return sorted([i for i in get_all_sizes(directory) if i >= needed_free])[0]
