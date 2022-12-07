@@ -102,5 +102,3 @@ if __name__ == "__main__":
                                  "{}/data/{}".format(directory, fn), finite=parse.finite, *parse.args)
                 print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
                     fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
-    else:
-        pass
