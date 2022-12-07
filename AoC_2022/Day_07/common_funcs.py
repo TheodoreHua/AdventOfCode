@@ -29,8 +29,7 @@ def parse_directory(commands: list, bar):
                 else:
                     cur_directory["dirs"][i] = {"dirs": {}, "files": {}, "parent": cur_directory}
                     cur_directory = cur_directory["dirs"][i]
-            continue
-        if i.startswith("dir ") and i[4:] not in cur_directory["dirs"]:
+        elif i.startswith("dir ") and i[4:] not in cur_directory["dirs"]:
             cur_directory["dirs"][i[4:]] = {"dirs": {}, "files": {}, "parent": cur_directory}
         else:
             filesize, filename = i.split(" ")
