@@ -16,28 +16,4 @@ def get_sum_above_100000(directory: dict, total: int=0):
     return total
 
 def main(d: list, bar):
-    directory = {"dirs": {}, "files": {}, "parent": None}
-    cur_directory = directory
-    for i in d:
-        if i.startswith("$ "):
-            i = i.lstrip("$ ")
-            if i.startswith("cd"):
-                i = i.lstrip("cd ")
-                if i == "/":
-                    cur_directory = directory
-                elif i == "..":
-                    cur_directory = cur_directory["parent"]
-                elif i in cur_directory["dirs"]:
-                    cur_directory = cur_directory["dirs"][i]
-                else:
-                    cur_directory["dirs"][i] = {"dirs": {}, "files": {}, "parent": cur_directory}
-                    cur_directory = cur_directory["dirs"][i]
-            continue
-        if i.startswith("dir "):
-            cur_directory["dirs"][i.lstrip("dir ")] = {"dirs": {}, "files": {}, "parent": cur_directory}
-        else:
-            filesize, filename = i.split(" ")
-            cur_directory["files"][filename] = int(filesize)
-        bar()
-
-    return get_sum_above_100000(directory)
+    return get_sum_above_100000(parse_directory(d, bar))
