@@ -18,7 +18,7 @@ def parse_directory(commands: list, bar):
     for i in commands:
         if i.startswith("$ "):
             i = i[2:]
-            if i.startswith("cd"):
+            if i.startswith("cd "):
                 i = i[3:]
                 if i == "/":
                     cur_directory = directory
