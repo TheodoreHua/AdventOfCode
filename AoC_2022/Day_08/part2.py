@@ -6,23 +6,14 @@
 
 def get_scenic_score(grid, x, y):
     scenic_score = 1
-    i = 1
-    for i in range(1, x + 1):
-        if grid[y][x - i] >= grid[y][x]:
-            break
-    scenic_score *= i
-    for i in range(1, y + 1):
-        if grid[y - i][x] >= grid[y][x]:
-            break
-    scenic_score *= i
-    for i in range(1, len(grid[0]) - x):
-        if grid[y][x + i] >= grid[y][x]:
-            break
-    scenic_score *= i
-    for i in range(1, len(grid) - y):
-        if grid[y + i][x] >= grid[y][x]:
-            break
-    scenic_score *= i
+    val = grid[y][x]
+    j = 1
+    for i in [(range(1, x + 1), lambda g, k: g[y][x - k]), (range(1, len(grid[0]) - x), lambda g, k: g[y][x + k]),
+                (range(1, y + 1), lambda g, k: g[y - k][x]), (range(1, len(grid) - y), lambda g, k: g[y + k][x])]:
+        for j in i[0]:
+            if i[1](grid, j) >= val:
+                break
+        scenic_score *= j
     return scenic_score
 
 def main(d: list, bar):

@@ -4,34 +4,16 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
+import numpy as np
+
 def is_visible(grid, x, y):
-    if grid[y][x] == 0:
-        return False
-    for i in range(1, x + 1):
-        if grid[y][x - i] >= grid[y][x]:
-            break
-    else:
-        return True
-    for i in range(1, y + 1):
-        if grid[y - i][x] >= grid[y][x]:
-            break
-    else:
-        return True
-    for i in range(1, len(grid[0]) - x):
-        if grid[y][x + i] >= grid[y][x]:
-            break
-    else:
-        return True
-    for i in range(1, len(grid) - y):
-        if grid[y + i][x] >= grid[y][x]:
-            break
-    else:
-        return True
-    return False
+    val, row, col = grid[y][x], grid[y,:], grid[:,x]
+    return not (max(row[:x]) >= val and max(row[x+1:]) >= val and max(col[:y]) >= val and max(col[y+1:]) >= val)
+
 
 def main(d: list, bar):
     visible = len(d[0]) * 2 + len(d) * 2 - 4
-    grid = [[int(c) for c in row] for row in d]
+    grid = np.array([[int(c) for c in row] for row in d])
     for y in range(1, len(grid) - 1):
         for x in range(1, len(grid[0]) - 1):
             if is_visible(grid, x, y):
