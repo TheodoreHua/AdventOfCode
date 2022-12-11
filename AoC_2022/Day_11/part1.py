@@ -4,18 +4,10 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from .commons import Monkey
-from numpy import product
+from .commons import *
 
 def main(d: str, bar):
-    monkeys = []
-    for monkey in d.split("\n\n"):
-        lines = monkey.split("\n")
-        starting_items = list(map(int, lines[1][17:].split(", ")))
-        operation = lines[2][19:]
-        test = lambda x, v=int(lines[3][21:]): x % v == 0
-        test_result = (int(lines[5][-1]), int(lines[4][-1]))
-        monkeys.append(Monkey(starting_items, operation, test, test_result))
+    monkeys, _ = parse_input(d)
 
     for _ in range(20):
         for monkey in monkeys:
