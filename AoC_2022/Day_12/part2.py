@@ -13,5 +13,6 @@ def main(d: list, bar):
     paths = []
     for x, y in np.argwhere(grid == 1):
         paths.append(len(networkx.shortest_path(G, (x, y), end)))
+        bar()
 
     return min(paths)
