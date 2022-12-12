@@ -15,7 +15,7 @@ def generate_grid(d: list):
         for j, c in enumerate(line):
             if c == 'S':
                 start = (i, j)
-                grid[i, j] = 1
+                grid[i, j] = 0
             elif c == 'E':
                 end = (i, j)
                 grid[i, j] = 25
@@ -28,13 +28,13 @@ def generate_grid(d: list):
 
 def generate_graph(grid: np.array):
     G = networkx.DiGraph()
-    for x, y in np.nindex(grid.shape):
-        if grid[y, x] == -1:
+    for x, y in np.ndindex(grid.shape):
+        if grid[x, y] == -1:
             continue
         for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-            ny, nx = y + dy, x + dx
-            if 0 <= ny < grid.shape[0] and 0 <= nx < grid.shape[1] and grid[ny, nx] != -1:
-                if grid[ny, nx] - grid[y, x] <= 1:
-                    G.add_edge((y, x), (ny, nx))
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < grid.shape[0] and 0 <= ny < grid.shape[1]:
+                if grid[nx, ny] - grid[x, y] <= 1:
+                    G.add_edge((x, y), (nx, ny))
 
     return G
