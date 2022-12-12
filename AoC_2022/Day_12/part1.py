@@ -10,4 +10,4 @@ def main(d: list, bar):
     grid, start, end = generate_grid(d)
     G = generate_graph(grid)
 
-    return len(networkx.shortest_path(G, start, end)) - 1
+    return networkx.shortest_path_length(G, start, end)
