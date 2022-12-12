@@ -8,6 +8,7 @@ from .commons import *
 
 
 def main(d: str, bar):
+    """F[[10000]]"""
     monkeys, lcm = parse_input(d)
 
     for _ in range(10000):

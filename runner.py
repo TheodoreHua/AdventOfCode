@@ -6,6 +6,7 @@
 
 import sys
 from datetime import date
+from re import compile
 from typing import Callable, Union, get_type_hints
 from os import listdir
 from os.path import isfile
@@ -14,6 +15,7 @@ from about_time import about_time
 from alive_progress import alive_bar
 from aocd import get_data, submit
 
+FINITE_REGEX = compile(r"F\[\[(\d+)]]")
 
 def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *args, **kwargs):
     """Default puzzle function runner code for AoC
@@ -34,10 +36,13 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
             d = f.read()
 
     # Track runtime and start the function with a progress bar
+    finite_doc = FINITE_REGEX.search(func.__doc__)
     if type(finite) is int:
         b = alive_bar(finite, force_tty=True)
     elif finite is True:
         b = alive_bar(len(d), force_tty=True)
+    elif finite_doc:
+        b = alive_bar(int(finite_doc.group(1)), force_tty=True)
     else:
         b = alive_bar(force_tty=True, unknown='stars')
     with b as bar:
