@@ -26,10 +26,4 @@ def main(d: list, bar):
             x += int(i.lstrip("addx "))
         bar()
 
-    for i in crt:
-        for j in i:
-            if j == 1:
-                print("#", end="")
-            else:
-                print(".", end="")
-        print()
+    return "\n".join(["".join(['#' if j == 1 else '.' for j in i]) for i in crt])
