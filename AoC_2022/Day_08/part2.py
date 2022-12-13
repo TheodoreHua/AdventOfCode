@@ -9,12 +9,13 @@ def get_scenic_score(grid, x, y):
     val = grid[y][x]
     j = 1
     for i in [(range(1, x + 1), lambda g, k: g[y][x - k]), (range(1, len(grid[0]) - x), lambda g, k: g[y][x + k]),
-                (range(1, y + 1), lambda g, k: g[y - k][x]), (range(1, len(grid) - y), lambda g, k: g[y + k][x])]:
+              (range(1, y + 1), lambda g, k: g[y - k][x]), (range(1, len(grid) - y), lambda g, k: g[y + k][x])]:
         for j in i[0]:
             if i[1](grid, j) >= val:
                 break
         scenic_score *= j
     return scenic_score
+
 
 def main(d: list, bar):
     grid = [[int(c) for c in row] for row in d]

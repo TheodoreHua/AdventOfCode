@@ -8,6 +8,7 @@ import numpy as np
 import networkx
 from string import ascii_lowercase
 
+
 def generate_grid(d: list):
     grid = np.zeros((len(d), len(d[0])), dtype=np.int8)
     start, end = None, None

@@ -12,6 +12,7 @@ def get_total_size(directory: dict):
         total += get_total_size(i)
     return total
 
+
 def parse_directory(commands: list, bar):
     directory = {"dirs": {}, "files": {}, "parent": None}
     cur_directory = directory

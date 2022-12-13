@@ -6,6 +6,7 @@
 
 from numpy import product
 
+
 class Monkey:
     def __init__(self, starting_items, operation, test, test_result):
         self.items = starting_items

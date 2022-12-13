@@ -6,9 +6,10 @@
 
 def main(d: list, bar):
     for i in range(0, len(d[0])):
-        if len(set(d[0][i: i+14])) == 14:
+        if len(set(d[0][i: i + 14])) == 14:
             return i + 14
         bar()
 
+
 def oneliner(d: list, bar):
-    return [i for i in range(0, len(d[0])) if len(set(d[0][i: i+14])) == 14][0] + 14
+    return [i for i in range(0, len(d[0])) if len(set(d[0][i: i + 14])) == 14][0] + 14

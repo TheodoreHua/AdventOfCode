@@ -6,6 +6,7 @@
 
 from .commons import *
 
+
 def main(d: list, bar):
     grid, start, end = generate_grid(d)
     G = generate_graph(grid)

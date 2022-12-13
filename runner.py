@@ -17,6 +17,7 @@ from aocd import get_data, submit
 
 FINITE_REGEX = compile(r"F\[\[(\d+)]]")
 
+
 def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *args, **kwargs):
     """Default puzzle function runner code for AoC
 

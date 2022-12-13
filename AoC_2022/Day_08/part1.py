@@ -6,9 +6,10 @@
 
 import numpy as np
 
+
 def is_visible(grid, x, y):
-    val, row, col = grid[y][x], grid[y,:], grid[:,x]
-    return not (max(row[:x]) >= val and max(row[x+1:]) >= val and max(col[:y]) >= val and max(col[y+1:]) >= val)
+    val, row, col = grid[y][x], grid[y, :], grid[:, x]
+    return not (max(row[:x]) >= val and max(row[x + 1:]) >= val and max(col[:y]) >= val and max(col[y + 1:]) >= val)
 
 
 def main(d: list, bar):

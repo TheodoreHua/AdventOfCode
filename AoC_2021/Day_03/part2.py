@@ -11,7 +11,7 @@ def main(d: list, bar):
     oxygen, co2 = None, None
     for i in range(entry_length):
         oc, cc = (lambda x=[c[i] for c in trimmed_oxygen]: {'0': x.count('0'), '1': x.count('1')})(), \
-                 (lambda x=[c[i] for c in trimmed_co2]: {'0': x.count('0'), '1': x.count('1')})()
+            (lambda x=[c[i] for c in trimmed_co2]: {'0': x.count('0'), '1': x.count('1')})()
         m, s = max(oc, key=oc.get) if oc['0'] != oc['1'] else '1', min(cc, key=cc.get) if cc['0'] != cc['1'] else '0'
         new_trimmed_oxygen, new_trimmed_co2 = [], []
 

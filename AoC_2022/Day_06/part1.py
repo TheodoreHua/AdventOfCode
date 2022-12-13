@@ -6,9 +6,10 @@
 
 def main(d: list, bar):
     for i in range(0, len(d[0])):
-        if len(set(d[0][i: i+4])) == 4:
+        if len(set(d[0][i: i + 4])) == 4:
             return i + 4
         bar()
 
+
 def oneliner(d: list, bar):
-    return [i for i in range(0, len(d[0])) if len(set(d[0][i: i+4])) == 4][0] + 4
+    return [i for i in range(0, len(d[0])) if len(set(d[0][i: i + 4])) == 4][0] + 4

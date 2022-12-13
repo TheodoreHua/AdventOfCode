@@ -6,7 +6,9 @@
 
 from .commons import *
 
+
 def main(d: str, bar):
+    """F[[20]]"""
     monkeys, _ = parse_input(d)
 
     for _ in range(20):

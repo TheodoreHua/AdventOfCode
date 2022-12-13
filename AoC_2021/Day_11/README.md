@@ -6,11 +6,16 @@
 
 ### Part One
 
-You enter a large cavern full of rare bioluminescent [dumbo octopuses](https://www.youtube.com/watch?v=eih-VSaS2g0)! They seem to not like the Christmas lights on your submarine, so you turn them off for now.
+You enter a large cavern full of rare bioluminescent [dumbo octopuses](https://www.youtube.com/watch?v=eih-VSaS2g0)!
+They seem to not like the Christmas lights on your submarine, so you turn them off for now.
 
-There are 100 <span title="I know it's weird; I grew up saying 'octopi' too.">octopuses</span> arranged neatly in a 10 by 10 grid. Each octopus slowly gains _energy_ over time and _flashes_ brightly for a moment when its energy is full. Although your lights are off, maybe you could navigate through the cave without disturbing the octopuses if you could predict when the flashes of light will happen.
+There are 100 <span title="I know it's weird; I grew up saying 'octopi' too.">octopuses</span> arranged neatly in a 10
+by 10 grid. Each octopus slowly gains _energy_ over time and _flashes_ brightly for a moment when its energy is full.
+Although your lights are off, maybe you could navigate through the cave without disturbing the octopuses if you could
+predict when the flashes of light will happen.
 
-Each octopus has an _energy level_ - your submarine can remotely measure the energy level of each octopus (your puzzle input). For example:
+Each octopus has an _energy level_ - your submarine can remotely measure the energy level of each octopus (your puzzle
+input). For example:
 
     5483143223
     2745854711
@@ -22,17 +27,22 @@ Each octopus has an _energy level_ - your submarine can remotely measure the ene
     6882881134
     4846848554
     5283751526
-    
 
-The energy level of each octopus is a value between `0` and `9`. Here, the top-left octopus has an energy level of `5`, the bottom-right one has an energy level of `6`, and so on.
+The energy level of each octopus is a value between `0` and `9`. Here, the top-left octopus has an energy level of `5`,
+the bottom-right one has an energy level of `6`, and so on.
 
 You can model the energy levels and flashes of light in _steps_. During a single step, the following occurs:
 
-*   First, the energy level of each octopus increases by `1`.
-*   Then, any octopus with an energy level greater than `9` _flashes_. This increases the energy level of all adjacent octopuses by `1`, including octopuses that are diagonally adjacent. If this causes an octopus to have an energy level greater than `9`, it _also flashes_. This process continues as long as new octopuses keep having their energy level increased beyond `9`. (An octopus can only flash _at most once per step_.)
-*   Finally, any octopus that flashed during this step has its energy level set to `0`, as it used all of its energy to flash.
+* First, the energy level of each octopus increases by `1`.
+* Then, any octopus with an energy level greater than `9` _flashes_. This increases the energy level of all adjacent
+  octopuses by `1`, including octopuses that are diagonally adjacent. If this causes an octopus to have an energy level
+  greater than `9`, it _also flashes_. This process continues as long as new octopuses keep having their energy level
+  increased beyond `9`. (An octopus can only flash _at most once per step_.)
+* Finally, any octopus that flashed during this step has its energy level set to `0`, as it used all of its energy to
+  flash.
 
-Adjacent flashes can cause an octopus to flash on a step even if it begins that step with very little energy. Consider the middle octopus with `1` energy in this situation:
+Adjacent flashes can cause an octopus to flash on a step even if it begins that step with very little energy. Consider
+the middle octopus with `1` energy in this situation:
 
     Before any steps:
     11111
@@ -54,7 +64,6 @@ Adjacent flashes can cause an octopus to flash on a step even if it begins that 
     61116
     51115
     45654
-    
 
 An octopus is _highlighted_ when it flashed during the given step.
 
@@ -191,7 +200,6 @@ Here is how the larger example above progresses:
     5532252350
     0532250600
     0032240000
-    
 
 After step 10, there have been a total of `204` flashes. Fast forwarding, here is the same configuration every 10 steps:
 
@@ -302,15 +310,16 @@ After step 10, there have been a total of `204` flashes. Fast forwarding, here i
     9322228966
     7922286866
     6789998766
-    
 
 After 100 steps, there have been a total of _`1656`_ flashes.
 
-Given the starting energy levels of the dumbo octopuses in your cavern, simulate 100 steps. _How many total flashes are there after 100 steps?_
+Given the starting energy levels of the dumbo octopuses in your cavern, simulate 100 steps. _How many total flashes are
+there after 100 steps?_
 
 ### Part Two
 
-It seems like the individual flashes aren't bright enough to navigate. However, you might have a better option: the flashes seem to be _synchronizing_!
+It seems like the individual flashes aren't bright enough to navigate. However, you might have a better option: the
+flashes seem to be _synchronizing_!
 
 In the example above, the first time all octopuses flash simultaneously is step _`195`_:
 
@@ -349,6 +358,6 @@ In the example above, the first time all octopuses flash simultaneously is step 
     0000000000
     0000000000
     0000000000
-    
 
-If you can calculate the exact moments when the octopuses will all flash simultaneously, you should be able to navigate through the cavern. _What is the first step during which all octopuses flash?_
+If you can calculate the exact moments when the octopuses will all flash simultaneously, you should be able to navigate
+through the cavern. _What is the first step during which all octopuses flash?_

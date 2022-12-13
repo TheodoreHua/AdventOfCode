@@ -6,6 +6,7 @@
 
 from .common_funcs import *
 
+
 def get_all_sizes(directory: dict, totals=None) -> list:
     if totals is None:
         totals = []
@@ -16,6 +17,7 @@ def get_all_sizes(directory: dict, totals=None) -> list:
         totals = get_all_sizes(i, totals)
 
     return totals
+
 
 def main(d: list, bar):
     directory = parse_directory(d, bar)
