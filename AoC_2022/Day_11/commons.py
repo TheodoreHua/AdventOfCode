@@ -13,8 +13,7 @@ WHITELIST = (Expression, BinOp, Constant, Mult, Add)
 class Monkey:
     def __init__(self, starting_items, operation, test, test_result):
         tree = parse(operation.replace("old", "0"), mode="eval")
-        valid = all(isinstance(node, WHITELIST) for node in walk(tree))
-        if not valid:
+        if not all(isinstance(node, WHITELIST) for node in walk(tree)):
             raise ValueError("Unsafe operation: {}".format(operation))
         self.items = starting_items
         self.operation = operation
