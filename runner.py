@@ -37,7 +37,7 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
             d = f.read()
 
     # Track runtime and start the function with a progress bar
-    finite_doc = FINITE_REGEX.search(func.__doc__)
+    finite_doc = FINITE_REGEX.search(str(func.__doc__))
     if type(finite) is int:
         b = alive_bar(finite, force_tty=True)
     elif finite is True:
