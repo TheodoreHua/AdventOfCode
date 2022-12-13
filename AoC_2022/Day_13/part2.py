@@ -21,6 +21,5 @@ def main(d: str, bar):
     for packet in d.strip().replace("\n\n", "\n").split("\n"):
         packets.append(loads(packet))
 
-    # print(sorted(packets, key=cmp_to_key(compare_wrapper)))
     sort = sorted(packets, key=cmp_to_key(compare_wrapper))
     return (sort.index([2]) + 1) * (sort.index([6]) + 1)
