@@ -5,6 +5,7 @@
 # ------------------------------------------------------------------------------
 
 import numpy as np
+from advent_of_code_ocr import convert_array_6
 
 
 def cycle(crt, current_draw, row, x):
@@ -28,4 +29,8 @@ def main(d: list, bar):
             x += int(i.lstrip("addx "))
         bar()
 
-    return "\n".join(["".join(['◼️' if j else '◻️' for j in i]) for i in crt])
+    print("\n".join(["".join(['◼️' if j else '◻️' for j in i]) for i in crt]))
+    try:
+        return convert_array_6(crt, fill_pixel=1, empty_pixel=0)
+    except KeyError:
+        return None
