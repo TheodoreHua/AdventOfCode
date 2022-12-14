@@ -28,4 +28,4 @@ def main(d: list, bar):
             x += int(i.lstrip("addx "))
         bar()
 
-    return "\n".join(["".join(['#' if j == 1 else '.' for j in i]) for i in crt])
+    return "\n".join(["".join(['◼️' if j == 1 else '◻️' for j in i]) for i in crt])
