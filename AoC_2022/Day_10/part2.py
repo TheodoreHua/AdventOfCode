@@ -31,6 +31,6 @@ def main(d: list, bar):
 
     print("\n".join(["".join(['◼️' if j else '◻️' for j in i]) for i in crt]))
     try:
-        return convert_array_6(crt, fill_pixel=1, empty_pixel=0)
+        return convert_array_6(crt, fill_pixel=True, empty_pixel=False)
     except KeyError:
         return None
