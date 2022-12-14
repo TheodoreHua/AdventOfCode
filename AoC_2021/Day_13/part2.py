@@ -5,6 +5,7 @@
 # ------------------------------------------------------------------------------
 
 from AoC_2021.Day_13.commons import parse_input
+from advent_of_code_ocr import convert_6
 
 
 def main(d: list, bar):
@@ -13,4 +14,6 @@ def main(d: list, bar):
         grid.fold(*fold)
         bar()
 
-    return str(grid)
+    grid_str = str(grid)
+    print(grid_str)
+    return convert_6(grid_str)
