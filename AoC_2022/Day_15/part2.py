@@ -21,13 +21,13 @@ def main(d: list, bar, max_bound=4000000):
     lines_l = set()  # Store all diagonals on the left side of the sensor
     lines_r = set()  # Store all diagonals on the right side of the sensor
     bar.text("Creating lines")
-    for ((x, y), manhattan) in manhattans.items():  # Calculate the lines for each sensor
-        # All manhattan distances are increased by 1, so we get the boundaries of each "no beacon zone"
+    for ((x, y), manhattan) in manhattans.items():  # Calculate the boundary lines for each sensor
+        # All manhattan distances are increased by 1, so we get the boundaries of each "no beacon zone", rather than the edges
         manhattan_i, manhattan_d = manhattan + 1, manhattan - 1
-        lines_l.add(-x + y + manhattan_i)  # Left diagonal line (+45°)
-        lines_l.add(-x - y - manhattan_d)  # Left diagonal line (-45°)
-        lines_r.add(x + y + manhattan_i)  # Right diagonal line (+45°)
-        lines_r.add(x + y - manhattan_d)  # Right diagonal line (-45°)
+        lines_l.add(-x + y + manhattan_i)
+        lines_l.add(-x - y - manhattan_d)
+        lines_r.add(x + y + manhattan_i)
+        lines_r.add(x + y - manhattan_d)
         bar()
 
     for l in lines_l:
@@ -37,6 +37,7 @@ def main(d: list, bar, max_bound=4000000):
             bar()
             # Check if the intersection is within the bounds of the beacon
             if 0 < intersect_x < max_bound and 0 < intersect_y < max_bound:
-                # Check that the intersection is not inside a "no beacon zone"
+                # Check that the intersection is not inside a "no beacon zone". (manhattan distance between the
+                # intersection and the sensor is greater than that of the sensor and beacon)
                 if all(abs(intersect_x - k[0]) + abs(intersect_y - k[1]) > v for k, v in manhattans.items()):
                     return intersect_x * 4000000 + intersect_y  # Calculate the tuning frequency
