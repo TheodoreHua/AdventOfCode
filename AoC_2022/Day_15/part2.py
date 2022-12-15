@@ -32,7 +32,7 @@ def main(d: list, bar, max_bound=4000000):
 
     for l in lines_l:
         for r in lines_r:
-            intersect_x, intersect_y = (l - r) // 2, (l + r) // 2  # Calculate the intersection point
+            intersect_x, intersect_y = (r - l) // 2, (r + l) // 2  # Calculate the intersection point
             bar.text("Checking intersection at {}, {} for distress beacon".format(intersect_x, intersect_y))
             bar()
             # Check if the intersection is within the bounds of the beacon
