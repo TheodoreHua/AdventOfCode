@@ -105,6 +105,6 @@ if __name__ == "__main__":
                 # originally result in the same filename)
                 expected = fn[6:-4].rstrip('-')
                 actual = run_aoc(getattr(module, 'oneliner' if parse.oneliner else 'main'),
-                                 "{}/data/{}".format(directory, fn), finite=parse.finite, *parse.args)
+                                 "{}/data/{}".format(directory, fn), parse.finite, *parse.args)
                 print("Test '{}' {}ED with a return result of '{}' and an expected result of {}".format(
                     fn, 'SUCCEED' if str(actual) == expected else 'FAIL', actual, repr(expected)))
