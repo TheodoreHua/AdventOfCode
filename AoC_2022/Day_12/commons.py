@@ -4,9 +4,10 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-import numpy as np
-import networkx
 from string import ascii_lowercase
+
+import networkx
+import numpy as np
 
 
 def generate_grid(d: list):

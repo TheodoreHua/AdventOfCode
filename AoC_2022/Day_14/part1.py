@@ -4,8 +4,10 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-from .commons import *
 from itertools import chain
+
+from .commons import *
+
 
 def main(d: list, bar):
     paths = parse_paths(d)

@@ -5,10 +5,11 @@
 # ------------------------------------------------------------------------------
 
 from ast import *
+
 from numpy import product
 
-
 WHITELIST = (Expression, BinOp, Constant, Mult, Add)
+
 
 class Monkey:
     def __init__(self, starting_items, operation, test, test_result):

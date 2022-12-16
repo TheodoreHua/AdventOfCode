@@ -6,6 +6,7 @@
 
 import numpy as np
 
+
 def parse_paths(d: list):
     paths = []
     for l in d:
@@ -14,6 +15,7 @@ def parse_paths(d: list):
             path.append(tuple(map(int, point.split(","))))
         paths.append(path)
     return paths
+
 
 def generate_grid(paths, min_x, max_x, max_y):
     grid = np.zeros((max_y + 1, max_x - min_x + 1), dtype=bool)

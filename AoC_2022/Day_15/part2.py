@@ -6,7 +6,9 @@
 
 from re import compile
 
-INPUT_REGEX = compile(r"Sensor at x=(?P<sensor_x>-?\d+), y=(?P<sensor_y>-?\d+): closest beacon is at x=(?P<beacon_x>-?\d+), y=(?P<beacon_y>-?\d+)")
+INPUT_REGEX = compile(
+    r"Sensor at x=(?P<sensor_x>-?\d+), y=(?P<sensor_y>-?\d+): closest beacon is at x=(?P<beacon_x>-?\d+), y=(?P<beacon_y>-?\d+)")
+
 
 def main(d: list, bar, max_bound=4000000):
     """Credit to /u/nthistle & /u/i_have_no_biscuits for the idea of looking for diagonal intersections."""
