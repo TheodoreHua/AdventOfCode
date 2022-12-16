@@ -20,7 +20,7 @@ def get_maximum_flow(valve, bar, time_left=30, opened_valves=None):
     largest = 0
     pos_val = valve.flow_rate * (time_left - 1)  # The maximum flow rate if we open this valve
     for v in valve.to:
-        # If this valve is not already opened, and it makes sense to open it (will actually relieve pressure), try to open it
+        # If this valve is not already opened, and it makes sense to open it (will actually pressure), try to open it
         if valve not in opened_valves and pos_val > 0:
             # Calculate the maximum flow rate if we open this valve, then store if larger than the current maximum
             largest = max(largest, pos_val + get_maximum_flow(v, bar, time_left - 2, opened_valves + (valve,)))
