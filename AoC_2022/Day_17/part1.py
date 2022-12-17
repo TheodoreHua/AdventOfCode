@@ -6,101 +6,126 @@
 
 import numpy as np
 
-def move_rock(rock, grid, x_diff, y_diff):
-    # If the rock would run into a wall, nothing happens
-    # If the rock would run into another rock, nothing happens
-    # If the rock would run into the bottom of the grid, nothing happens
-    if min([x + x_diff for x, y in rock]) < 0:
-        return rock, grid
-    if max([x + x_diff for x, y in rock]) >= grid.shape[0] - 1:
-        return rock, grid
-    for x, y in rock:
-        grid[x, y] = 0
-    for x, y in rock:
-        grid[x + x_diff, y + y_diff] = 1
-    return [(x + x_diff, y + y_diff) for x, y in rock], grid
+shape_map = {
+    0: "O",
+    1: "-",
+    2: "+",
+    3: "J",
+    4: "I",
+}
 
-def simulate_rock_movement(rock, grid, jet_pattern):
-    while True:
-        # print("Simulating")
-        for direction in jet_pattern:
-            if direction == "<":
-                rock, grid = move_rock(rock, grid, -1, 0)
-            elif direction == ">":
-                rock, grid = move_rock(rock, grid, 1, 0)
-            # Check if rock hit the bottom or another rock
-            if max([y for x, y in rock]) >= grid.shape[1] - 1:
-                return grid
-            for x, y in rock:
-                if grid[x, y + 1] == 1:
-                    return grid
-        rock, grid = move_rock(rock, grid, 0, 1)
+
+class Rock:
+    def __init__(self, bottom_y, shape, grid):
+        self.bottom_y = bottom_y
+        self.shape = shape
+        if shape == "-":
+            self._rock = [
+                (2, bottom_y),
+                (3, bottom_y),
+                (4, bottom_y),
+                (5, bottom_y),
+            ]
+        elif shape == "+":
+            self._rock = [
+                (3, bottom_y - 2),
+                (2, bottom_y - 1),
+                (3, bottom_y - 1),
+                (4, bottom_y - 1),
+                (3, bottom_y),
+            ]
+        elif shape == "J":
+            self._rock = [
+                (4, bottom_y - 2),
+                (4, bottom_y - 1),
+                (2, bottom_y),
+                (3, bottom_y),
+                (4, bottom_y),
+            ]
+        elif shape == "I":
+            self._rock = [
+                (2, bottom_y - 3),
+                (2, bottom_y - 2),
+                (2, bottom_y - 1),
+                (2, bottom_y),
+            ]
+        elif shape == "O":
+            self._rock = [
+                (2, bottom_y - 1),
+                (3, bottom_y - 1),
+                (2, bottom_y),
+                (3, bottom_y),
+            ]
+        else:
+            raise ValueError("Invalid shape")
+        for x, y in self._rock:
+            grid[y, x] = 1
+
+    def __repr__(self):
+        return f"{self.shape} ({self._rock})"
+
+    def __str__(self):
+        return self.shape
+
+    def can_move_down(self, grid):
+        for x, y in self._rock:
+            new_y = y + 1
+            if not 0 <= new_y <= grid.shape[0] - 1:
+                return False
+            if grid[new_y, x] == 1 and (x, new_y) not in self._rock:
+                return False
+        return True
+
+    def can_move_lr(self, grid, direction):
+        for x, y in self._rock:
+            new_x = x + direction
+            if not 0 <= new_x <= grid.shape[1] - 1:
+                return False
+            if grid[y, new_x] == 1 and (new_x, y) not in self._rock:
+                return False
+        return True
+
+    def move_down(self, grid):
+        self.bottom_y += 1
+        for i, (x, y) in enumerate(self._rock):
+            self._rock[i] = (x, y + 1)
+            grid[y, x] = 0
+        for x, y in self._rock:
+            grid[y, x] = 1
+
+    def move_lr(self, grid, direction):
+        for i, (x, y) in enumerate(self._rock):
+            self._rock[i] = (x + direction, y)
+            grid[y, x] = 0
+        for x, y in self._rock:
+            grid[y, x] = 1
+
+    def simulate_movement(self, grid, jet_pattern, jet_index):
+        while True:
+            if self.can_move_lr(grid, jet_pattern[jet_index]):
+                self.move_lr(grid, jet_pattern[jet_index])
+            jet_index = (jet_index + 1) % len(jet_pattern)
+            if not self.can_move_down(grid):
+                return jet_index
+            self.move_down(grid)
+
 
 def get_tallest_rock_y(grid):
-    # print("Searching")
-    # print("getting tallest rock")
-    # for i in range(grid.shape[1] - 1):
-    #     if grid[: i,].sum() > 0:
-    #         return i
-    # return grid.shape[0] - 1
-    # Get the first row that has a 1 in it
-    for y in range(grid.shape[1]):
-        if grid[:, y].sum() > 0:
-            return y
-    return grid.shape[1] - 1
+    for y in range(grid.shape[0]):
+        if grid[y, :].sum() > 0:
+            return y - 1
+    return grid.shape[0] - 1
 
 
 def main(d: str, bar):
     """F[[2022]]"""
-    jet_pattern = list(d.strip())
-    grid = np.zeros((8, 5000), dtype=int)  # The maximum height of all rocks stacked is 4448. 5000 for buffer.
+    jet_pattern = [-1 if i == "<" else 1 for i in d.strip()]
+    grid = np.zeros((5000, 7), dtype=int)  # The maximum height of all rocks stacked is 4448. 5000 for buffer.
+    rocks = []
+    jet_index = 0
     for i in range(1, 2023):
         i_mod = i % 5
-        spawn_y = get_tallest_rock_y(grid) - 4
-        if i_mod == 1:
-            rock = [  # -
-                (2, spawn_y),
-                (3, spawn_y),
-                (4, spawn_y),
-                (5, spawn_y),
-            ]
-        elif i_mod == 2:
-            rock = [  # +
-                (3, spawn_y - 2),
-                (2, spawn_y - 1),
-                (3, spawn_y - 1),
-                (4, spawn_y - 1),
-                (3, spawn_y),
-            ]
-        elif i_mod == 3:
-            rock = [  # J
-                (4, spawn_y - 2),
-                (4, spawn_y - 1),
-                (2, spawn_y),
-                (3, spawn_y),
-                (4, spawn_y),
-            ]
-        elif i_mod == 4:
-            rock = [  # I
-                (2, spawn_y - 3),
-                (2, spawn_y - 2),
-                (2, spawn_y - 1),
-                (2, spawn_y),
-            ]
-        elif i_mod == 0:
-            rock = [  # O
-                (2, spawn_y - 1),
-                (3, spawn_y - 1),
-                (2, spawn_y),
-                (3, spawn_y),
-            ]
-        else:
-            raise Exception("This should never happen!")
-        grid = simulate_rock_movement(rock, grid, jet_pattern)
+        rocks.append(Rock(get_tallest_rock_y(grid) - 3, shape_map[i_mod], grid))
+        jet_index = rocks[-1].simulate_movement(grid, jet_pattern, jet_index)
         bar()
-
-    for y in range(grid.shape[1]):
-        for x in range(grid.shape[0]):
-            print("#" if grid[x, y] == 1 else ".", end="")
-        print()
-    return grid.shape[1] - get_tallest_rock_y(grid)
+    return grid.shape[0] - 1 - get_tallest_rock_y(grid)

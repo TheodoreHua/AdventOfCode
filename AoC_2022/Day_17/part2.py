@@ -4,5 +4,5 @@
 #   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # ------------------------------------------------------------------------------
 
-def main(d: list, bar):
-    pass
+def main(d: str, bar):
+    raise NotImplementedError("Not implemented yet")
