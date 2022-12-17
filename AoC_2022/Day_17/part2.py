@@ -71,7 +71,7 @@ class Rock:
     def can_move_lr(self, depths, direction):
         for x, y in self._rock:
             new_x = x + direction
-            if new_x < 0 or new_x > len(depths) - 1:
+            if not 0 <= new_x <= 6:
                 return False
             if y <= depths[new_x]:
                 return False
@@ -95,26 +95,35 @@ class Rock:
         while True:
             if self.can_move_lr(depths, jet_pattern[jet_index]):
                 self.move_lr(jet_pattern[jet_index])
-            jet_index = (jet_index + 1) % len(jet_pattern)
             if not self.can_move_down(depths):
                 return jet_index
+            jet_index = (jet_index + 1) % len(jet_pattern)
             self.move_down()
 
 
 def main(d: str, bar):
-    """F[[2022]]"""
-    jet_pattern = [-1 if i == "<" else 1 for i in d.strip()]
-    depths = [0 for i in range(7)]
-    jet_index = 0
-    top = 0
-    for i in range(1, 2023):
-        i_mod = i % 5
-        rock = Rock(top + 3, shape_map[i_mod])
-        jet_index = rock.simulate_movement(depths, jet_pattern, jet_index)
-        depths = rock.update_depths(depths)
-        top = max(depths) + 1
-        bar()
-        print(depths)
-        if i == 2:
-            break
-    return max(depths)
+    raise NotImplementedError("This code simply does not work for some reason (probably a stupid mistake). "
+                              "I'm giving up on it for now.")
+    # jet_pattern = [-1 if i == "<" else 1 for i in d.strip()]
+    # depths = [-1 for i in range(7)]
+    # jet_index = 0
+    # top = 0
+    # seen = {}
+    # rocks_fallen = 1
+    # result = 0
+    # while rocks_fallen <= 1000000000000:
+    #     i_mod = rocks_fallen % 5
+    #     rock = Rock(top + 3, shape_map[i_mod])
+    #     jet_index = rock.simulate_movement(depths, jet_pattern, jet_index)
+    #     depths = rock.update_depths(depths)
+    #     top = max(depths) + 1
+    #     heights = tuple(d - top for d in depths)
+    #     if (i_mod, heights, jet_index) in seen:
+    #         prev_rocks_fallen, prev_top = seen[(i_mod, heights, jet_index)]
+    #         mult = (1000000000000 - rocks_fallen) // (rocks_fallen - prev_rocks_fallen)
+    #         rocks_fallen += (rocks_fallen - prev_rocks_fallen) * mult
+    #         result += (top - prev_top) * mult
+    #     seen[(i_mod, heights, jet_index)] = (rocks_fallen, top)
+    #     rocks_fallen += 1
+    #     bar()
+    # return top + result
