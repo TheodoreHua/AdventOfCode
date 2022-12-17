@@ -127,4 +127,10 @@ def main(d: str, bar):
         if rock_tallest < top:
             top = rock_tallest
         bar()
+        for y in range(-10, 0):
+            for x in range(7):
+                print("#" if grid[y, x] else ".", end="")
+            print()
+        if i == 2:
+            break
     return grid.shape[0] - 1 - top
