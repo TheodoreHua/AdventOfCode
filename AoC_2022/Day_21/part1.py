@@ -8,8 +8,10 @@ from .commons import parse_input, MathMonkey
 
 
 def main(d: list, bar):
+    bar.text("Parsing input")
     monkeys = parse_input(d)
 
+    bar.text("Finding root's number")
     root = monkeys["root"]
     while root.number is None:
         for monkey in monkeys.values():

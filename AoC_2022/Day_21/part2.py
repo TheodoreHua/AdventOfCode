@@ -10,11 +10,13 @@ from .commons import parse_input, MathMonkey
 
 
 def main(d: list, bar):
+    bar.text("Parsing input")
     monkeys = parse_input(d)
 
     monkeys["root"].operation = '='
     monkeys["humn"].number = None  # Just so I don't accidentally use it
 
+    bar.text("Solving non-humn equations")
     last_solve_count = -1
     solve_count = 0
     while last_solve_count != solve_count:
@@ -29,7 +31,9 @@ def main(d: list, bar):
                 if monkey.can_perform_operation():
                     monkey.perform_operation()
                     solve_count += 1
+            bar()
 
+    bar.text("Generating equation")
     equation = monkeys["root"].get_equation()
     replace_count = None
     while replace_count != 0:
@@ -47,8 +51,9 @@ def main(d: list, bar):
                 equation = equation.replace(monkey.name, f"({monkey.get_equation()})")
             if old_equation != equation:
                 replace_count += 1
-        bar()
+            bar()
 
+    bar.text("Solving equation")
     equation_l, equation_r = equation.split(" = ")
     equation = sympify(equation_l) - sympify(equation_r)
     return str(round(solve(equation, Symbol("humn"))[0]))
