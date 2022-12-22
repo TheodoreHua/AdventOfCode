@@ -51,6 +51,9 @@ def parse_input(d: str):
 def get_first_nonvoid(arr):
     return np.where(arr != 0)[0][0]
 
+def get_last_nonvoid(arr):
+    return np.where(arr != 0)[0][-1]
+
 def print_grid(grid):
     for y in range(grid.shape[1]):
         row = ""
