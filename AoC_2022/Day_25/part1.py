@@ -18,8 +18,7 @@ def main(d: list, bar):
     for line in d:
         cur = 0
         for char in line:
-            cur *= 5
-            cur += char_map[char]
+            cur = cur * 5 + char_map[char]
         decimal_sum += cur
         bar()
 
