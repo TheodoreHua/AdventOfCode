@@ -6,10 +6,18 @@
 
 from re import compile
 
-REGEX_START = compile(r"^.*?(\d|one|two|three|four|five|six|seven|eight|nine)")
-REGEX_END = compile(r".*(\d|one|two|three|four|five|six|seven|eight|nine).*?$")
+NUM = compile(r"(?=(\d|one|two|three|four|five|six|seven|eight|nine))")
 
-number_to_digit = {
+num_to_dig = {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
     "one": "1",
     "two": "2",
     "three": "3",
@@ -21,21 +29,16 @@ number_to_digit = {
     "nine": "9"
 }
 
+
 def main(d: list, bar):
     total = 0
     for line in d:
-        number = ""
-        match = REGEX_START.findall(line)[0]
-        if match.isdigit():
-            number += match
-        else:
-            number += number_to_digit[match]
-        match = REGEX_END.findall(line)[0]
-        if match.isdigit():
-            number += match
-        else:
-            number += number_to_digit[match]
-        total += int(number)
+        matches = NUM.findall(line)
+        total += int(num_to_dig[matches[0]] + num_to_dig[matches[-1]])
         bar()
 
     return total
+
+
+def oneliner(d: list, bar):
+    return sum([int(num_to_dig[NUM.findall(line)[0]] + num_to_dig[NUM.findall(line)[-1]]) for line in d])
