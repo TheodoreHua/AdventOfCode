@@ -5,4 +5,18 @@
 # ------------------------------------------------------------------------------
 
 def main(d: list, bar):
-    pass
+    total = 0
+    for line in d:
+        number = ""
+        for character in line:
+            if character.isdigit():
+                number += character
+                break
+        for character in reversed(line):
+            if character.isdigit():
+                number += character
+                break
+        total += int(number)
+        bar()
+
+    return total
