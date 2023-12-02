@@ -20,7 +20,7 @@ def get_scenic_score(grid, x, y):
 def main(d: list, bar):
     grid = [[int(c) for c in row] for row in d]
     scenic_scores = []
-    # This is just casually assuming the edges can't be the highest point. I'm too lazy to fix it...
+    # This is just casually assuming the edges can't be the highest point. I'CUBE_MAX too lazy to fix it...
     for y in range(1, len(grid) - 1):
         for x in range(1, len(grid[0]) - 1):
             scenic_scores.append(get_scenic_score(grid, x, y))
