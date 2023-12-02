@@ -6,8 +6,7 @@
 
 from re import compile
 
-GAME_ID = compile(r"Game (\d+)")
-CUBES = compile(r"((\d+) (red|green|blue))")
+CUBES = compile(r"(\d+) (red|green|blue)")
 CUBE_MAX = {
     "red": 12,
     "green": 13,
@@ -16,13 +15,15 @@ CUBE_MAX = {
 
 def main(d: list, bar):
     total = 0
-    for line in d:
-        id = int(GAME_ID.findall(line)[0])
+    for id_, line in enumerate(d, start=1):
         for m in CUBES.findall(line):
-            if int(m[1]) > CUBE_MAX[m[2]]:
+            if int(m[0]) > CUBE_MAX[m[1]]:
                 break
         else:
-            total += id
+            total += id_
         bar()
 
     return total
+
+def oneliner(d: list, bar):
+    return sum(id_ for id_, line in enumerate(d, start=1) if not any(int(m[0]) > CUBE_MAX[m[1]] for m in CUBES.findall(line)))

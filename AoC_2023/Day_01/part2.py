@@ -41,4 +41,4 @@ def main(d: list, bar):
 
 
 def oneliner(d: list, bar):
-    return sum([int(num_to_dig[NUM.findall(line)[0]] + num_to_dig[NUM.findall(line)[-1]]) for line in d])
+    return sum(int(num_to_dig[NUM.findall(line)[0]] + num_to_dig[NUM.findall(line)[-1]]) for line in d)

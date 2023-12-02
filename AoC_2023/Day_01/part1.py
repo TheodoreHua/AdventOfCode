@@ -20,4 +20,4 @@ def main(d: list, bar):
 
 
 def oneliner(d: list, bar):
-    return sum([int(NUM.findall(line)[0] + NUM.findall(line)[-1]) for line in d])
+    return sum(int(NUM.findall(line)[0] + NUM.findall(line)[-1]) for line in d)
