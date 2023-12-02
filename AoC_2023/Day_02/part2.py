@@ -7,7 +7,6 @@
 from re import compile, findall
 from math import prod
 
-GAME_ID = compile(r"Game (\d+)")
 CUBES = compile(r"(\d+) (red|green|blue)")
 
 def main(d: list, bar):
