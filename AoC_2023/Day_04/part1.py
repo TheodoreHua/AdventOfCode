@@ -7,7 +7,7 @@
 from re import compile
 from math import floor
 
-LINE_REGEX = compile(r"^Card +\d+: ([\d ]+) \| ([\d ]+)$")  # TODO: Optimize regex (should not need 2)
+LINE_REGEX = compile(r"^Card +\d+: ([\d ]+) \| ([\d ]+)$")
 DIGIT_REGEX = compile(r"\d+")
 
 def main(d: list, bar):
@@ -22,4 +22,4 @@ def main(d: list, bar):
     return total
 
 def oneliner(d: list, bar):
-    return sum([floor(2**(len(set(DIGIT_REGEX.findall((match := LINE_REGEX.fullmatch(card)).group(1))) & set(DIGIT_REGEX.findall(match.group(2)))) - 1)) for card in d])
+    return sum(floor(2**(len(set(DIGIT_REGEX.findall((match := LINE_REGEX.fullmatch(card)).group(1))) & set(DIGIT_REGEX.findall(match.group(2)))) - 1)) for card in d)
