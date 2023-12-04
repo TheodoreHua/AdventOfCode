@@ -7,7 +7,7 @@
 from re import compile
 from math import floor
 
-LINE_REGEX = compile(r"^Card +\d+: ([\d ]+) \| ([\d ]+)$")
+LINE_REGEX = compile(r"^Card +\d+: ([\d ]+) \| ([\d ]+)$")  # TODO: Optimize regex (should not need 2)
 DIGIT_REGEX = compile(r"\d+")
 
 def main(d: list, bar):
