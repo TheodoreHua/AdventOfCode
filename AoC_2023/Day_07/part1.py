@@ -10,12 +10,12 @@ STRENGTH = "AKQJT98765432"
 
 class Hand:
     def __init__(self, hand, bid):
-        self.hand = list(hand)
+        self.hand = hand
         self.bid = int(bid)
         self.score = get_score_value(self.hand)
 
     def __repr__(self):
-        return f"{''.join(self.hand)} (BID: {self.bid}, SCORE: {self.score})"
+        return f"{self.hand} (BID: {self.bid}, SCORE: {self.score})"
 
 def get_hand_score(hand):
     return [STRENGTH.index(i) for i in hand]
@@ -41,7 +41,7 @@ def get_score_value(hand):
     elif occur_len == 5:
         ts = [6]
     else:
-        raise Exception(f"Unexpected state while handling hand | {''.join(hand)} | Uniques: {occur_len}")
+        raise Exception(f"Unexpected state while handling hand | {hand} | Uniques: {occur_len}")
 
     return ts + get_hand_score(hand)
 
