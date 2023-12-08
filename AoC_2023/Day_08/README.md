@@ -1,4 +1,4 @@
-A thank you to /u/IronForce_ for providing a [simplified explanation](https://old.reddit.com/r/adventofcode/comments/18dk9kf/2023_day_8_part_2_my_attempt_at_explaining_this/) of how LCM applies for this problem, as well as /u/adamsilkey for providing a [solution](https://old.reddit.com/r/adventofcode/comments/18df7px/2023_day_8_solutions/kcgtuea/) to reference against.  
+A thank you to [/u/IronForce_](https://old.reddit.com/user/IronForce_) for providing a [simplified explanation](https://old.reddit.com/r/adventofcode/comments/18dk9kf/2023_day_8_part_2_my_attempt_at_explaining_this/) of how LCM applies for this problem, as well as [/u/adamsilkey](https://old.reddit.com/user/adamsilkey) for providing a [solution](https://old.reddit.com/r/adventofcode/comments/18df7px/2023_day_8_solutions/kcgtuea/) to reference against while I worked on P2.  
 
 ---
 
