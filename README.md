@@ -18,4 +18,5 @@ idea, or method of implementation from someone else is used, it will be mentione
 - **[2020](https://adventofcode.com/2020)**: ⏳
 - **[2021](https://adventofcode.com/2021)**: ⏳
 - **[2022](https://adventofcode.com/2022)**: ⏳
-- **[2023](https://adventofcode.com/2023)**: 🛠️
+- **[2023](https://adventofcode.com/2023)**: ⏳
+- **[2024](https://adventofcode.com/2024)**: 🛠️
