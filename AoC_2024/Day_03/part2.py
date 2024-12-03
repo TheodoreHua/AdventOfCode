@@ -10,7 +10,7 @@ from re import findall
 def main(d: str, bar):
     s = 0
     do = True
-    for i, j, k in findall(r"(mul\((\d+),(\d+)\)|do\(\)|don't\(\))", d):
+    for i, j, k in findall(r"(mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\))", d):
         if i == "do()":
             do = True
         elif i == "don't()":

@@ -9,11 +9,11 @@ from re import findall
 
 def main(d: str, bar):
     s = 0
-    for i, j in findall(r"mul\((\d+),(\d+)\)", d):
+    for i, j in findall(r"mul\((\d{1,3}),(\d{1,3})\)", d):
         s += int(i) * int(j)
         bar()
     return s
 
 
 def oneliner(d: str, bar):
-    return sum(int(i) * int(j) for i, j in findall(r"mul\((\d+),(\d+)\)", d))
+    return sum(int(i) * int(j) for i, j in findall(r"mul\((\d{1,3}),(\d{1,3})\)", d))
