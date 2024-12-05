@@ -23,3 +23,7 @@ def main(d: list, bar):
     diags += [''.join(dm.diagonal(i)) for i in range(dm.shape[1]-1, -dm.shape[0], -1)]
 
     return sum(total_count(i, bar) for i in rows + cols + diags)
+
+
+def oneliner(d: list, bar):
+    return (lambda _: 0)(dm := np.array([list(i) for i in d])) + sum(i.count("XMAS") + i.count("SAMX") for i in d + [''.join(i) for i in dm.transpose()] + [''.join(dm[::-1, :].diagonal(i)) for i in range(-dm.shape[0]+1, dm.shape[1])] + [''.join(dm.diagonal(i)) for i in range(dm.shape[1]-1, -dm.shape[0], -1)])
