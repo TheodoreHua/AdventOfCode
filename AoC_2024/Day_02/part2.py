@@ -8,6 +8,7 @@ from .commons import is_safe
 
 
 def main(d: list, bar):
+    """F[[D-LEN]]"""
     safe = 0
     for l in d:
         lp = list(map(int, l.split()))

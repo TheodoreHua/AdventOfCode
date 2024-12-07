@@ -13,6 +13,7 @@ OPERATORS = [
 
 
 def main(d: list, bar):
+    """F[[D-LEN]]"""
     calibrations = parse_input(d)
     total = 0
     for wanted, nums in calibrations.items():
