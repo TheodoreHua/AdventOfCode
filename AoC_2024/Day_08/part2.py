@@ -1,0 +1,21 @@
+# ------------------------------------------------------------------------------
+#  This Source Code Form is subject to the terms of the Mozilla Public
+#  License, v. 2.0. If a copy of the MPL was not distributed with this
+#   file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# ------------------------------------------------------------------------------
+
+from .commons import *
+
+
+def main(d: list, bar):
+    antennas = parse_input(d)
+
+    ans = set()
+    for p in grid_traverse(len(d), len(d[0])):
+        for _, an1, an2 in antenna_pairs(antennas):
+            if point_on_line(p, an1, an2):
+                ans.add(p)
+                break
+        bar()
+
+    return len(ans)
