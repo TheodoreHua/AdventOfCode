@@ -15,7 +15,7 @@ from about_time import about_time
 from alive_progress import alive_bar
 from aocd import get_data, submit
 
-FINITE_REGEX = compile(r"F\[\[(\d+|D-LEN)]]")
+FINITE_REGEX = compile(r"F\[\[(\d+|D-LEN|DxD0-LEN)]]")
 
 
 def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *args, **kwargs):
@@ -43,6 +43,8 @@ def run_aoc(func: Callable, input_path: str, finite: Union[int, bool] = False, *
         b = alive_bar(finite, force_tty=True)
     elif finite is True or finite_val == "D-LEN":
         b = alive_bar(len(d), force_tty=True)
+    elif finite_val == "DxD0-LEN":
+        b = alive_bar(len(d)*len(d[0]), force_tty=True)
     elif finite_doc:
         b = alive_bar(int(finite_val), force_tty=True)
     else:

@@ -8,6 +8,7 @@ from .commons import *
 
 
 def main(d: list, bar):
+    """F[[DxD0-LEN]]"""
     antennas = parse_input(d)
 
     ans = set()
