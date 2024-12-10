@@ -8,8 +8,8 @@ import sys
 from datetime import date
 from re import compile
 from typing import Callable, Union, get_type_hints
-from os import listdir
-from os.path import isfile
+from os import listdir, makedirs
+from os.path import isdir, isfile
 
 from about_time import about_time
 from alive_progress import alive_bar
@@ -88,6 +88,7 @@ if __name__ == "__main__":
             if not isfile("{}/data/input.txt".format(directory)):
                 print("Input file does not exist, getting input data from AoC")
                 data = get_data(day=parse.day, year=parse.year)
+                makedirs("{}/data".format(directory), exist_ok=True)
                 with open("{}/data/input.txt".format(directory), "w") as f:
                     f.write(data)
             result = run_aoc(getattr(module, "oneliner" if parse.oneliner else "main"),
