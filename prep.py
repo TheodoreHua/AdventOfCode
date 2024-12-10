@@ -11,7 +11,7 @@ Script to prep the directory structure for a specific day of AoC.
 if __name__ == "__main__":
     import argparse
     from datetime import date
-    from os import mkdir
+    from os import makedirs
     from os.path import isdir, isfile
 
     # Get the template code
@@ -26,13 +26,9 @@ if __name__ == "__main__":
 
     # Parse the provided arguments
     args = parser.parse_args()
-    if not isdir("AoC_{}".format(args.year)):  # Create the year folder if needed
-        mkdir("AoC_{}".format(args.year))
-    if not isdir("AoC_{}/Day_{:02}".format(args.year, args.day)):  # Create the day folder if needed
-        mkdir("AoC_{}/Day_{:02}".format(args.year, args.day))
-    if not isdir("AoC_{}/Day_{:02}/data".format(args.year, args.day)):  # Create the data folder if needed
-        mkdir("AoC_{}/Day_{:02}/data".format(args.year, args.day))
 
+    # Create all dirs in path if needed
+    makedirs("AoC_{}/Day_{:02}/data".format(args.year, args.day), exist_ok=True)
     if not isfile("AoC_{}/Day_{:02}/part1.py".format(args.year, args.day)):  # Create the part 1 file if needed
         with open("AoC_{}/Day_{:02}/part1.py".format(args.year, args.day), "w") as f:
             f.write(template)
